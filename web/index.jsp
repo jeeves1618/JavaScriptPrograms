@@ -16,7 +16,7 @@
             font-size: medium;
             font: outline;
             margin: 1pt;
-            background-color: aquamarine;
+            background-color: FloralWhite;
             padding: 1%;
         }
         h1 {
@@ -25,6 +25,7 @@
         h2 {
             font-size: large;
         }
+		/*
         .split {
                 height: 100%;
                 width: 73.1%;
@@ -48,6 +49,7 @@
         padding: 5px;
         background-color:#EAFAF1;
         }
+		*/
     </style>
 
     <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
@@ -59,7 +61,7 @@
     <%takeHomeInstanceTwo.calculateOldTakeHome();%>
 
     <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
-
+<!--
     <div class="split right">
         <h2 align=center>Cash Flow Statement</h2>
         
@@ -167,10 +169,11 @@
             
          </table>  
         
-    </div>
-    <div class="split left">
+    </div> 
+	-->
+    <div>
         <h2 align=center>Personal Balance Sheet</h2>
-        <table border=1; style="float:right">
+        <table border=1; align=center>
             <col width="340"> 
             <col width="180"> 
             <col width="340"> 
@@ -289,11 +292,18 @@
                 <td align="left" ><b>Total Equity</b></td>
                 <td align="right"><%= totalInc.getNetWorthFmtd()%></td>
             </tr>
-			<tr><td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp">Income Statement</a></td>
-				<td align="center" >Cash Flow Statement</td>
+		</table>
+		<table border=1; style="float:right">
+        <col width="325"> 
+        <col width="325"> 
+        <col width="325"> 
+        <col width="325"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp">Income Statement</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow Statement</td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a></td>
 			</tr>
+		</table>
     </div>
 </body>
 </html>
