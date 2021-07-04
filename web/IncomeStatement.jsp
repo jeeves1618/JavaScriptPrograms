@@ -87,7 +87,7 @@
     <div>
         <h2 align=center>Income Statement</h2>
         <table border=1; align=center>
-            <col width="1100"> 
+            <col width="1126	"> 
             <col width="180"> 
           
             <tr><td align="center" colspan="2"><%= ExpenseInstanceOne.getTimePeriod()%></td></tr>
@@ -117,15 +117,20 @@
                 <td align="right"><b><%= rf.formattedRupee(ft.format((SalesRevenue-(nonDiscretionaryExpenses*10)-(discretionaryExpenses*10))+((ExpenseInstanceOne.getInterestIncome() + ExpenseInstanceTwo.getInterestIncome())*10) - (IncomeInstanceOne.getTotalTax() + IncomeInstanceOne.getTotalTax())))%></b></td></tr>
 		</table>
         <table border=1; align=center>
-			<col width="320"> 
-			<col width="320"> 
-			<col width="320"> 
-			<col width="320"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260">  
             <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow Statement</td>
                 <td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a></td>
                 <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a></td>
             </tr>
+			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp">Expense Split</td>
+			</tr>
         </table>
     </div>
 </body>

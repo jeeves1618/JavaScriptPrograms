@@ -62,121 +62,127 @@
 
     <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
     <div>
-        <h2 align=center>Cash Flow Statement</h2>
+        <h2 align=center>Account Receivables</h2>
         
         <table border=1; align=center>
+			<col width="1100"> 
+            <col width="180"> 
             <tr><td align="center" colspan="2"><b>Salary Two</b></td></tr>
             <tr>
                <td align="left">Annual Salary     </td>
-               <td><%= takeHomeInstanceOne.getAnnualSalaryFmtd()%></td>
+               <td align="right"><%= takeHomeInstanceOne.getAnnualSalaryFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Annual Tax Liability     </td>
-                <td><%= takeHomeInstanceOne.getTotalTaxFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceOne.getTotalTaxFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Gross Monthly Salary     </td>
-                <td><%= takeHomeInstanceOne.getMonthlySalaryFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceOne.getMonthlySalaryFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Monthly Tax Liability     </td>
-                <td><%= takeHomeInstanceOne.getMonthlyTaxFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceOne.getMonthlyTaxFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">PF Contribution     </td>
-                <td><%= takeHomeInstanceOne.getPFFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceOne.getPFFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Monthly Take Home</td>
-                <td><%= takeHomeInstanceOne.getMonthlyTakeHomeFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceOne.getMonthlyTakeHomeFmtd()%></td>
             </tr>
          
             <tr><td align="center" colspan="2"><b>Salary One</b></td></tr>
             <tr>
                <td align="left">Annual Salary     </td>
-               <td><%= takeHomeInstanceTwo.getAnnualSalaryFmtd()%></td>
+               <td align="right"><%= takeHomeInstanceTwo.getAnnualSalaryFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Annual Tax Liability     </td>
-                <td><%= takeHomeInstanceTwo.getTotalTaxFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceTwo.getTotalTaxFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Gross Monthly Salary     </td>
-                <td><%= takeHomeInstanceTwo.getMonthlySalaryFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceTwo.getMonthlySalaryFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Monthly Tax Liability     </td>
-                <td><%= takeHomeInstanceTwo.getMonthlyTaxFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceTwo.getMonthlyTaxFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">PF Contribution     </td>
-                <td><%= takeHomeInstanceTwo.getPFFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceTwo.getPFFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Monthly Take Home</td>
-                <td><%= takeHomeInstanceTwo.getMonthlyTakeHomeFmtd()%></td>
+                <td align="right"><%= takeHomeInstanceTwo.getMonthlyTakeHomeFmtd()%></td>
             </tr>
             <tr><td align="center" colspan="2"><b>Cash Flow Summary</b></td></tr>
             <tr>
                <td align="left">Interest Income    </td>
-               <td><%= totalInc.getRentalIncomeOneFmtd()%></td>
+               <td align="right"><%= totalInc.getRentalIncomeTwoFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Rental Income     </td>
-                <td><%= totalInc.getRentalIncomeTwoFmtd()%></td>
+                <td align="right"><%= totalInc.getRentalIncomeOneFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Capital Gains     </td>
-                <td><%= totalInc.getRentalIncomeThreeFmtd()%></td>
+                <td align="right"><%= totalInc.getRentalIncomeThreeFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Total Monthly Income     </td>
-                <td><%= totalInc.getIncomeTotalFmtd()%></td>
+                <td align="right"><%= totalInc.getIncomeTotalFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Total Monthly Expenses     </td>
-                <td><%= totalInc.getMonthlyExpensesFmtd()%></td>
+                <td align="right"><%= totalInc.getMonthlyExpensesFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Total Monthly EMI     </td>
-                <td><%= totalInc.getMonthlyEMIFmtd()%></td>
+                <td align="right"><%= totalInc.getMonthlyEMIFmtd()%></td>
             </tr>
             
             <tr>
                 <td align="left">Net Estimated Savings</td>
-                <td><%= totalInc.getNetSavingsFmtd()%></td>
+                <td align="right"><%= totalInc.getNetSavingsFmtd()%></td>
             </tr>
 
             <tr>
                 <td align="center" colspan="2"><b>Solvent till <%= totalInc.getSurvivalDateFmtd()%></b></td>
             </tr>
 			</table>
-			<table border=1; style="float:right">
-			<col width="325"> 
-			<col width="325"> 
-			<col width="325"> 
-			<col width="325">
+			<table border=1; align=center>
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
 				<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a></td>
 					<td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp">Income Statement</a></td>
+					<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow Statement</td>
 					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a></td>
 					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a></td>
 				</tr>
-           
+				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp">Financial Independence and Early Retirement</a></td>
+					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp">Expense Split</td>
+				</tr>
          </table>  
 
     </div> 

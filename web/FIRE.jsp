@@ -1,5 +1,7 @@
 <%@page import="CommonModules.*"%>
 <%@page import="CashFlowStatement.*"%>
+<%@page import="IncomeStatement.*"%>
+<%@page import="BalanceSheet.*"%>
 <%@page import="java.text.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
@@ -84,33 +86,42 @@
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
 	
+	<%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
+
+    <%takeHomeInstanceOne.calculateOldTakeHome();%>
+
+    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
+
+    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
+
+    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
     <div>
-        <h2 align=center>Cash Flow Statement</h2>
+        <h2 align=center>Financial Independence and Retiring Early</h2>
         
         <table border=1; align=center>
             <col width="1100"> 
             <col width="180"> 
           
             <tr><td align="center" colspan="2"><%= CashFlowInstanceOne.getTimePeriod()%></td></tr>
-            <tr><td align="left" ><div class="tooltip">Beginning Cash Balance<span class="tooltiptext">Cash on hand at the start of the accounting period.</span></div></td>
-                <td align="right"><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getBeginningCashBalance() + CashFlowInstanceTwo.getBeginningCashBalance()))%></td></tr>
+            <tr><td align="left" ><div class="tooltip">Non Discretionary Expenses<span class="tooltiptext">Cash on hand at the start of the accounting period.</span></div></td>
+                <td align="right"><%= totalInc.getMonthlyExpensesFmtd()%></td></tr>
 			<tr><td align="left" ><div class="tooltip"><span class="tooltiptext">This line is intentionally left blank</span></div></td>
                 <td align="right"></td></tr>
-            <tr><td align="left" ><div class="tooltip">Cash Receipts<span class="tooltiptext">Also called collections or simply receipts come from collecting money from customers.</span></div></td>
+            <tr><td align="left" ><div class="tooltip">Current Networth<span class="tooltiptext">Also called collections or simply receipts come from collecting money from customers.</span></div></td>
                 <td align="right"><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getCashReceipts() + CashFlowInstanceTwo.getCashReceipts()))%></td></tr>
-			<tr><td align="left" ><div class="tooltip">Cash Disbursements<span class="tooltiptext">Disbursement is writing a check to pay for the rent, for inventory, for supplies or salaries.</span></div></td>
+			<tr><td align="left" ><div class="tooltip">Fire Target<span class="tooltiptext">Disbursement is writing a check to pay for the rent, for inventory, for supplies or salaries.</span></div></td>
                 <td align="right"><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getCashDisbursements() + CashFlowInstanceTwo.getCashDisbursements()))%></td></tr>
 			<tr><td align="left" ><div class="tooltip"><span class="tooltiptext">This line is intentionally left blank</span></div></td>
                 <td align="right"></td></tr>
-			<tr><td align="left" ><div class="tooltip"><b>Cash from Operations</b><span class="tooltiptext">Reports the flow of money into and out of business from making and selling of products. It is a good measure of how well a business is able to raise cash through operations</span></div></td>
+			<tr><td align="left" ><div class="tooltip"><b>Inflation Rate</b><span class="tooltiptext">Reports the flow of money into and out of business from making and selling of products. It is a good measure of how well a business is able to raise cash through operations</span></div></td>
                 <td align="right"><b><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getCashReceipts() + CashFlowInstanceTwo.getCashReceipts() - CashFlowInstanceOne.getCashDisbursements() - CashFlowInstanceTwo.getCashDisbursements()))%></b></td></tr> 
 			<tr><td align="left" ><div class="tooltip"><span class="tooltiptext">This line is intentionally left blank</span></div></td>
                 <td align="right"></td></tr>
-			<tr><td align="left" ><div class="tooltip">Fixed Asset Purchases<span class="tooltiptext">Expenses spent on fixed assets.</span></div></td>
+			<tr><td align="left" ><div class="tooltip">Rate of Return<span class="tooltiptext">Expenses spent on fixed assets.</span></div></td>
                 <td align="right"><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getFixedAssetPurchases() + CashFlowInstanceTwo.getFixedAssetPurchases()))%></td></tr>
 			<tr><td align="left" ><div class="tooltip"><span class="tooltiptext">This line is intentionally left blank</span></div></td>
                 <td align="right"></td></tr>
-			<tr><td align="left" ><div class="tooltip"><b>Net Borrowings</b><span class="tooltiptext">Difference between the money lent and the money borrowed.</span></div></td>
+			<tr><td align="left" ><div class="tooltip"><b>Target Deficit</b><span class="tooltiptext">Difference between the money lent and the money borrowed.</span></div></td>
                 <td align="right"><%= rf.formattedRupee(ft.format(CashFlowInstanceOne.getNetBorrowings() + CashFlowInstanceTwo.getNetBorrowings()))%></td></tr>
 			<tr><td align="left" ><div class="tooltip"><span class="tooltiptext">This line is intentionally left blank</span></div></td>
                 <td align="right"></td></tr>
@@ -136,7 +147,7 @@
 					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a></td>
 					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a></td>
 				</tr>
-				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp">Financial Independence and Early Retirement</a></td>
+				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow Statement</a></td>
 					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp">Expense Split</a></td>
 				</tr>
          </table>  
