@@ -26,6 +26,27 @@
         h2 {
             font-size: large;
         }
+		.button {
+				  border: none;
+				  color: white;
+				  padding: 2px 2px;
+				  text-align: center;
+				  text-decoration: none;
+				  display: inline-block;
+				  font-size: medium;
+				  margin: 4px 2px;
+				  transition-duration: 0.4s;
+				  cursor: pointer;
+				 }
+		.button2 {
+					background-color: white;
+					color: black;
+					border: 2px solid #008CBA;
+				}
+		.button2:hover {
+					background-color: grey;
+					color: white;
+				}
     </style>
 
     <%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
@@ -57,7 +78,8 @@
             <col width="180"> 
             <col width="340"> 
             <col width="180">  
-            <tr><td align="center" colspan="4"><%= ExpenseInstanceOne.getTimePeriod()%></td></tr>
+            <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			<a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Yearly View</button></td></tr>
             <tr><td align="center" colspan="2"><b>Ben - Monthly Summary</b></td>
                 <td align="center" colspan="2"><b>Bun - Monthly Summary</b></td></tr>
                         
@@ -175,8 +197,7 @@
             <tr><td align="left" > </td>
                 <td align="right"> </td>
                 <td align="left" ><b>Discretionary Spending</b></td>
-                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
-                    ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()))%></td>
             </tr>
             
             <tr><td align="left" > </td>
@@ -191,8 +212,7 @@
                 ))
                     %></td>
                 <td align="left" ><b>Total Expenses</b></td>
-                <td align="right"><%= rf.formattedRupee(ft.format(
-                    nonDiscretionaryExpenses + ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()))%>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getTotalExpenses() + ExpenseInstanceTwo.getTotalExpenses()))%>
                 </td>
             </tr>
 			</table>

@@ -93,6 +93,7 @@
             <col width="180"> 
             <tr><td align="center" colspan="2"><b>Asset</b></td>
                 <td align="center" colspan="2"><b>Liability</b></td></tr>
+				
             <tr><td align="left" colspan="2"><b>Liquid Assets</b></td>
                 <td align="left" colspan="2"><b>Accrued Expenses</b></td></tr>
             
@@ -113,7 +114,7 @@
             </tr>
                         
             <tr><td align="left" colspan="2"><b><%= totalInc.chartOfAccountsList[4].subType%></b></td>
-                <td align="left" colspan="2"><b><%= totalInc.chartOfAccountsList[18].subType%></b></td>
+                <td align="left" colspan="2"><b><a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp"><%= totalInc.chartOfAccountsList[18].subType%></a></b></td>
             </tr>
             
 			<tr><td align="left" >&emsp;&emsp;<%= totalInc.chartOfAccountsList[2].itemDescription%></td>

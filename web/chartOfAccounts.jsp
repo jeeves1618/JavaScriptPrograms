@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Personal Financial Statement</title>
+<title>Chart of Accounts</title>
 </head>
 <body>
 
@@ -28,8 +28,8 @@
         }
     </style>
 
-    <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();%>
-    <%ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
+    <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
+     ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
     
     <div>
         <h2 align=center>Chart of Accounts</h2>
