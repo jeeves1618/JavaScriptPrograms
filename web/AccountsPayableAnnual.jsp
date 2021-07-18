@@ -34,17 +34,17 @@
 				  text-decoration: none;
 				  display: inline-block;
 				  font-size: medium;
-				  margin: 4px 2px;
+				  margin: 0px 0px;
 				  transition-duration: 0.4s;
 				  cursor: pointer;
 				 }
 		.button2 {
-					background-color: white;
+					background-color: Snow;
 					color: black;
 					border: 2px solid #008CBA;
 				}
 		.button2:hover {
-					background-color: grey;
+					background-color: SlateGray;
 					color: white;
 				}
     </style>
@@ -74,11 +74,11 @@
     <div>
         <h2 align=center>Account Payables</h2>
         <table border=1; align=center>
-            <col width="340"> 
+            <col width="471"> 
             <col width="180"> 
-            <col width="340"> 
+            <col width="471"> 
             <col width="180">  
-            <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 			<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Monthly View</button></td></tr>
             <tr><td align="center" colspan="2"><b>Ben - Annual Summary</b></td>
                 <td align="center" colspan="2"><b>Bun - Annual Summary</b></td></tr>
@@ -223,14 +223,14 @@
 			<col width="260"> 
 			<col width="260"> 
 			<col width="260">  
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp">Income Statement</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow Statement</td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a></td>
+            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+                <td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp" class="button button2">Income Statement</a></td>
+                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
             </tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp">Expense Split</a></td>
+			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 			</tr>
         </table>
     </div>
