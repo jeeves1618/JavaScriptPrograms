@@ -103,6 +103,7 @@
                     ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
 					ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
 					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
+					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
                     ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses())*ExpenseInstanceTwo.getMonthsBetween();%>
 
     <div>
@@ -124,8 +125,8 @@
                 <td align="right"><%= totalInc.chartOfAccountsList[14].cashValueFmtd%></td>
             </tr>
             
-			<tr><td align="left" >&emsp;&emsp;<%= totalInc.chartOfAccountsList[57].itemDescription%></td>
-                <td align="right"><%= totalInc.chartOfAccountsList[57].cashValueFmtd%></td>
+			<tr><td align="left" >&emsp;&emsp;<%= totalInc.chartOfAccountsList[30].itemDescription%></td>
+                <td align="right"><%= totalInc.chartOfAccountsList[30].cashValueFmtd%></td>
                 <td align="left" colspan="2"><b></b></td>
             </tr>
 			
@@ -167,8 +168,8 @@
                 <td align="right"><%= totalInc.chartOfAccountsList[19].cashValueFmtd%></td>
             </tr>
             
-            <tr><td align="left" colspan="1"><b><%= totalInc.chartOfAccountsList[30].subType%></b></td>
-                <td align="right" colspan="1"><%= totalInc.chartOfAccountsList[30].cashValueFmtd%></td>
+            <tr><td align="left" colspan="1"><b><%= totalInc.chartOfAccountsList[57].subType%></b></td>
+                <td align="right" colspan="1"><%= totalInc.chartOfAccountsList[57].cashValueFmtd%></td>
                 <td align="left" colspan="1"><b><%= totalInc.chartOfAccountsList[31].subType%></b></td>
                 <td align="right" colspan="1"><%= totalInc.chartOfAccountsList[31].cashValueFmtd%></td>
             </tr>

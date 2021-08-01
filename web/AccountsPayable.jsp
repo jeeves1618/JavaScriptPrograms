@@ -49,8 +49,8 @@
 				}
     </style>
 
-    <%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
     <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
+	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
     <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
@@ -67,6 +67,7 @@
                     ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
 					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
                     ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
+					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
                     ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI());%>
     <script>
         var jsVariable='<%= (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance())*100/(ExpenseInstanceTwo.getTotalExpenses()+ExpenseInstanceOne.getTotalExpenses())%>';
@@ -193,11 +194,23 @@
                 <td align="left" >Home Loan EMIs</td>
                 <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI()))%></td>
             </tr>
+			
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" >Books outside of Work</td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()))%></td>
+            </tr>
+			
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" >Healthcare and Fitness</td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses()))%></td>
+            </tr>
 
             <tr><td align="left" > </td>
                 <td align="right"> </td>
                 <td align="left" ><b>Discretionary Spending</b></td>
-                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments() + ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()))%></td>
             </tr>
             
             <tr><td align="left" > </td>

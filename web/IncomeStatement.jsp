@@ -8,6 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Income Statement</title>
+
 </head>
 <body>
 
@@ -98,13 +99,11 @@
                     ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense() + 
                     ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
                     ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
+					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
                     ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI());%>
-	<%double discretionaryExpenses = (ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
-                    ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments());%>
+	<%double discretionaryExpenses = (ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments());%>
    
-    <script>
-        var jsVariable='<%= (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance())*100/(ExpenseInstanceTwo.getTotalExpenses()+ExpenseInstanceOne.getTotalExpenses())%>';
-    </script>
+   
     <div>
         <h2 align=center>Income Statement</h2>
         <table border=1; align=center>
@@ -153,6 +152,7 @@
 				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 			</tr>
         </table>
-    </div>
+    </div>	
+	
 </body>
 </html>

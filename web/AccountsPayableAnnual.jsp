@@ -67,6 +67,7 @@
                     ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
 					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
                     ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
+					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
                     ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI());%>
     <script>
         var jsVariable='<%= (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance())*100/(ExpenseInstanceTwo.getTotalExpenses()+ExpenseInstanceOne.getTotalExpenses())%>';
@@ -104,31 +105,31 @@
             <tr><td align="center" colspan="2"><b>Annual Income Split</b></td>
                 <td align="center" colspan="2"><b>Annual Expense Split</b></td></tr>
                         
-            <tr><td align="left" >Salary Income</td>
+            <tr><td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Salary">Salary Income</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getSalaryIncome() + ExpenseInstanceTwo.getSalaryIncome()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Apartment%20Maintenance">Apartment Maintenance</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 
-            <tr><td align="left" >Interest Income</td>
+            <tr><td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Interest%20Income">Interest Income</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getInterestIncome() + ExpenseInstanceTwo.getInterestIncome()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Electricity%20Expenses">Electricity Bill</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
                         
-            <tr><td align="left" >Dividend Income</td>
+            <tr><td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Dividend%20Income">Dividend Income</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getDividendIncome() + ExpenseInstanceTwo.getDividendIncome()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Miscellaneous">Amazon Purchases and Miscellaneous</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 
-            <tr><td align="left" >Rental Income</td>
+            <tr><td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Rental%20Income">Rental Income</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getRentalIncome() + ExpenseInstanceTwo.getRentalIncome()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Brokerage%20Maintenance">Trading Expenses</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getBrokerageMaintenance() + ExpenseInstanceTwo.getBrokerageMaintenance())* ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
                         
-            <tr><td align="left" >Maturity of Savings</td>
+            <tr><td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Sale%20	Proceeds">Maturity of Savings</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getSaleProceeds() + ExpenseInstanceTwo.getSaleProceeds()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Insurance">Home, Car, Personal Insurance</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getHomeInsurance() + ExpenseInstanceTwo.getHomeInsurance()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
@@ -192,6 +193,19 @@
                 <td align="right"> </td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Monthly%20EMI">Home Loan EMIs</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+            </tr>
+			
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Discretionary%20Learning">Books outside of Work</a></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+            </tr>
+
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Healthcare%20and%20Fitness">Healthcare and Fitness</a></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() 
+				 + ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 
             <tr><td align="left" > </td>

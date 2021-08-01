@@ -52,6 +52,7 @@
     <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
      ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
     
+	<main class="maincontent">
     <div>
         <h2 align=center>Chart of Accounts</h2>
 		<table border=1; align=center>
@@ -72,7 +73,7 @@
 			 <tr><td align="left" colspan="4" color="Ivory"><b>.</b>
             </tr>
         </table>
-        <table border=1; align=center>
+        <table class="class2"border=1; align=center>
             <col width="221"> 
             <col width="540"> 
             <col width="237"> 
@@ -96,5 +97,6 @@
             </table>
 			
     </div>
+	</main>
 </body>
 </html>

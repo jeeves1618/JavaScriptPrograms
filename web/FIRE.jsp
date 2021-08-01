@@ -10,6 +10,10 @@
 <%! double inflationRate, rateOfReturn, annualWithdrawals, netSavings, twentyX, twentyFiveX, fiftyX, seventyFiveX, hundredX, twentyXETA, networthGrowth;%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
+<% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
+ response.setHeader("Pragma","no-cache"); //HTTP 1.0 
+ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server  
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,6 +141,7 @@
                     ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense() + 
                     ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
 					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
+					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
                     ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() 
                     );
 		double nonDiscretionaryNonInflationaryExpenses = ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI();
