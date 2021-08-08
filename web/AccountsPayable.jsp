@@ -1,5 +1,6 @@
 <%@page import="IncomeStatement.*"%>
 <%@page import="CommonModules.*"%>
+<%@page import="PerformanceAnalyzer.*"%>
 <%@page import="java.text.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
@@ -51,6 +52,8 @@
 
     <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
 	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
+	<%GainsCalculator GainsInstanceOne = new GainsCalculator("One", "Sav1");%>
+    <%GainsCalculator GainsInstanceTwo = new GainsCalculator("Two", "Sav1");%>
     <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
@@ -112,13 +115,13 @@
             </tr>
 
             <tr><td align="left" >Interest Income</td>
-                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getInterestIncome() + ExpenseInstanceTwo.getInterestIncome()))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getInterestIncome() + ExpenseInstanceTwo.getInterestIncome() + GainsInstanceOne.getInterestIncome() + GainsInstanceTwo.getInterestIncome()))%></td>
                 <td align="left" >Electricity Bill</td>
                 <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill()))%></td>
             </tr>
                         
             <tr><td align="left" >Dividend Income</td>
-                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getDividendIncome() + ExpenseInstanceTwo.getDividendIncome()))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getDividendIncome() + ExpenseInstanceTwo.getDividendIncome() + GainsInstanceOne.getDividendIncome() + GainsInstanceTwo.getDividendIncome()))%></td>
                 <td align="left" >Amazon Purchases and Miscellaneous</td>
                 <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill()))%></td>
             </tr>
@@ -236,7 +239,7 @@
 			<col width="260"> 
 			<col width="260">  
             <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/IncomeStatement.jsp" class="button button2">Income Statement</a></td>
+                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
                 <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
                 <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>

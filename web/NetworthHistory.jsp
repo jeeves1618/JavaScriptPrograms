@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Income Statement</title>
+<title>Networth History</title>
 
 </head>
 <body>
