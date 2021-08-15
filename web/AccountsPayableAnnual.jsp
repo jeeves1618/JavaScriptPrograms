@@ -2,13 +2,72 @@
 <%@page import="CommonModules.*"%>
 <%@page import="PerformanceAnalyzer.*"%>
 <%@page import="java.text.*"%>
+<%@ page import="com.google.gson.*"%>
+<%@ page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
+ <%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
+    <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
+	<%GainsCalculator GainsInstanceOne = new GainsCalculator("One", "Sav1");%>
+    <%GainsCalculator GainsInstanceTwo = new GainsCalculator("Two", "Sav1");%>
+    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
+    <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
+    <%RupeeFormatter rf = new RupeeFormatter();%>
+    <%double nonDiscretionaryExpenses = ExpenseInstanceOne.getNonDiscretionaryExpenses() + ExpenseInstanceTwo.getNonDiscretionaryExpenses();%>
+ <%
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+ 
+map = new HashMap<Object,Object>(); map.put("label", "Home Loan EMIs"); map.put("y", Math.round(((ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Apartment"); map.put("y", Math.round(((ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance())*100/nonDiscretionaryExpenses)*100.0)/100.0); map.put("exploded", true); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Electricity"); map.put("y", Math.round(((ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Amazon Purchases"); map.put("y", Math.round(((ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Trading Expenses"); map.put("y", Math.round(((ExpenseInstanceOne.getBrokerageMaintenance() + ExpenseInstanceTwo.getBrokerageMaintenance())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Insurance"); map.put("y", Math.round(((ExpenseInstanceOne.getHomeInsurance() + ExpenseInstanceTwo.getHomeInsurance())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Cash"); map.put("y", Math.round(((ExpenseInstanceOne.getCashWithdrawals() + ExpenseInstanceTwo.getCashWithdrawals())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Groceries"); map.put("y", Math.round(((ExpenseInstanceOne.getGroceryExpenses() + ExpenseInstanceTwo.getGroceryExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Travel Expenses"); map.put("y", Math.round(((ExpenseInstanceOne.getTravelExpense() + ExpenseInstanceTwo.getTravelExpense())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Extended Family"); map.put("y", Math.round(((ExpenseInstanceOne.getFamilyExpenses() + ExpenseInstanceTwo.getFamilyExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Shopping and Eat Outs"); map.put("y", Math.round(((ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Entertainment and Connectivity"); map.put("y", Math.round(((ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Education, Laptop, etc."); map.put("y", Math.round(((ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Domestic Help"); map.put("y", Math.round(((ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Healthcare"); map.put("y", Math.round(((ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses())*100/nonDiscretionaryExpenses)*100.0)/100.0); list.add(map);
+
+ 
+String dataPoints = gsonObj.toJson(list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Account Payables</title>
+<script type="text/javascript">
+window.onload = function() { 
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2",
+	animationEnabled: true,
+	exportFileName: "New Year Resolutions",
+	exportEnabled: true,
+	title:{
+		text: " "
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		legendText: "{label}",
+		toolTipContent: "{label}: <strong>{y}%</strong>",
+		indexLabel: "{label} {y}%",
+		dataPoints : <%out.print(dataPoints);%>
+	}]
+});
+ 
+chart.render();
+ 
+}
+</script>
 </head>
 <body>
 
@@ -27,6 +86,10 @@
         h2 {
             font-size: large;
         }
+		.center {
+			margin: auto;
+			border: 1px solid black;
+			}
 		.button {
 				  border: none;
 				  color: white;
@@ -50,33 +113,32 @@
 				}
     </style>
 
-    <%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
-    <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
-	<%GainsCalculator GainsInstanceOne = new GainsCalculator("One", "Sav1");%>
-    <%GainsCalculator GainsInstanceTwo = new GainsCalculator("Two", "Sav1");%>
-    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
-    <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
-    <%RupeeFormatter rf = new RupeeFormatter();%>
-    <%double nonDiscretionaryExpenses = (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance() + 
-                    ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill() +
-                    ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill() +
-                    ExpenseInstanceOne.getBrokerageMaintenance() + ExpenseInstanceTwo.getBrokerageMaintenance() +
-                    ExpenseInstanceOne.getHomeInsurance() + ExpenseInstanceTwo.getHomeInsurance() +
-                    ExpenseInstanceOne.getCashWithdrawals() + ExpenseInstanceTwo.getCashWithdrawals() +
-                    ExpenseInstanceOne.getGroceryExpenses() + ExpenseInstanceTwo.getGroceryExpenses() +
-                    ExpenseInstanceOne.getTravelExpense() + ExpenseInstanceTwo.getTravelExpense() +
-                    ExpenseInstanceOne.getFamilyExpenses() + ExpenseInstanceTwo.getFamilyExpenses() + 
-                    ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense() + 
-                    ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
-					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
-                    ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
-					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
-                    ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI());%>
+    
     <script>
         var jsVariable='<%= (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance())*100/(ExpenseInstanceTwo.getTotalExpenses()+ExpenseInstanceOne.getTotalExpenses())%>';
     </script>
     <div>
-        <h2 align=center>Account Payables</h2>
+        <h2 align=center> Accounts Payables Yearly</h2>
+		<table border=1; align=center>
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260">  
+            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
+                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+            </tr>
+			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+			</tr>
+        </table>
+		<div id="blankLine" style="height: 25px; width: 100%;"></div>	
+		<div class="center"; id="chartContainer"; style="height: 470px; width: 69.99%;"></div>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<div id="blankLine" style="height: 25px; width: 100%;"></div>
         <table border=1; align=center>
             <col width="471"> 
             <col width="180"> 
@@ -192,6 +254,19 @@
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Healthcare%20and%20Fitness">Healthcare and Fitness</a></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() 
+				 + ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+            </tr>
+			<tr><td align="left" > </td>
+                <td align="right"> </td>
+                <td align="left" ><b>Non Discretionary Spending</b></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(nonDiscretionaryExpenses * ExpenseInstanceOne.getMonthsBetween()))%>
+                </td>
+            </tr>
+						
             <tr><td align="left" > </td>
                 <td align="right"> </td>
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Monthly%20EMI">Home Loan EMIs</a></td>
@@ -203,26 +278,14 @@
                 <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Discretionary%20Learning">Books outside of Work</a></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
-
-			<tr><td align="left" > </td>
-                <td align="right"> </td>
-                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Healthcare%20and%20Fitness">Healthcare and Fitness</a></td>
-                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() 
-				 + ExpenseInstanceOne.getdLearningExpenses() + ExpenseInstanceTwo.getdLearningExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
-            </tr>
-
+			
             <tr><td align="left" > </td>
                 <td align="right"> </td>
                 <td align="left" ><b>Discretionary Spending</b></td>
-                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getDiscretionaryExpenses() + ExpenseInstanceTwo.getDiscretionaryExpenses()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
             
-            <tr><td align="left" > </td>
-                <td align="right"> </td>
-                <td align="left" >Non Discretionary Spending</td>
-                <td align="right"><%= rf.formattedRupee(ft.format(nonDiscretionaryExpenses * ExpenseInstanceOne.getMonthsBetween()))%>
-                </td>
-            </tr>
+            
             <tr><td align="left" ><b>Total Income </b></td>
                 <td align="right"><%= rf.formattedRupee(ft.format((
                     ExpenseInstanceOne.getTotalIncome() + ExpenseInstanceTwo.getTotalIncome()) * ExpenseInstanceOne.getMonthsBetween()
@@ -234,22 +297,6 @@
                 </td>
             </tr>
 			</table>
-            <table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260">  
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-            </tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
-			</tr>
-        </table>
     </div>
 </body>
 </html>

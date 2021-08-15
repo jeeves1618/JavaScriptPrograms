@@ -2,13 +2,77 @@
 <%@page import="BalanceSheet.*"%>
 <%@page import="CommonModules.*"%>
 <%@page import="java.text.*"%>
+<%@ page import="com.google.gson.*"%>
+<%@ page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
+ <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
+
+    <%takeHomeInstanceOne.calculateOldTakeHome();%>
+
+    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
+
+    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
+
+    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
+	
+	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
+    <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
+    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
+    <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
+    <%RupeeFormatter rf = new RupeeFormatter();%>
+    <%double nonDiscretionaryExpenses = (ExpenseInstanceOne.getNonDiscretionaryExpenses() + ExpenseInstanceTwo.getNonDiscretionaryExpenses())*ExpenseInstanceTwo.getMonthsBetween();%>
+ <%
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+ 
+map = new HashMap<Object,Object>(); map.put("label", "Liquid Assets"); map.put("y", totalInc.chartOfAccountsList[0].cashValue + totalInc.chartOfAccountsList[30].cashValue + totalInc.chartOfAccountsList[1].cashValue); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Accounts Receivables"); map.put("y", totalInc.chartOfAccountsList[2].cashValue + totalInc.chartOfAccountsList[3].cashValue + totalInc.chartOfAccountsList[4].cashValue + totalInc.chartOfAccountsList[5].cashValue); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Fixed Assets"); map.put("y", totalInc.chartOfAccountsList[6].cashValue + totalInc.chartOfAccountsList[7].cashValue + totalInc.chartOfAccountsList[8].cashValue + totalInc.chartOfAccountsList[9].cashValue); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Other Assets"); map.put("y", totalInc.chartOfAccountsList[11].cashValue + totalInc.chartOfAccountsList[12].cashValue + totalInc.chartOfAccountsList[13].cashValue); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Total Assets"); map.put("isIntermediateSum", true); map.put("color", "#55646e"); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Accrued Expenses"); map.put("y", -totalInc.chartOfAccountsList[14].cashValue); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Accounts Payables"); map.put("y", -1 * (totalInc.chartOfAccountsList[15].cashValue + totalInc.chartOfAccountsList[16].cashValue + totalInc.chartOfAccountsList[17].cashValue + totalInc.chartOfAccountsList[18].cashValue)); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Long Term Debts"); map.put("y", -1 * (totalInc.chartOfAccountsList[20].cashValue + totalInc.chartOfAccountsList[21].cashValue + totalInc.chartOfAccountsList[22].cashValue + totalInc.chartOfAccountsList[23].cashValue)); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Networth"); map.put("isCumulativeSum", true); map.put("color", "#55646e"); list.add(map);
+ 
+String dataPoints = gsonObj.toJson(list);
+%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Personal Financial Statement</title>
+<script type="text/javascript">
+window.onload = function() { 
+ 
+var chart = new CanvasJS.Chart("chartContainer", {	
+	animationEnabled: true,
+	title:{
+		text: " "
+	},
+	axisX:{
+		labelMaxWidth: 75
+	},
+	axisY: {
+		prefix: "Rs ",
+		includeZero: true
+	},	
+	data: [{
+		type: "waterfall",
+		yValueFormatString: "Rs ##,##,##0.00",
+		indexLabel: "{y}",
+		risingColor: "#50cdc8",
+		fallingColor: "#ff6969",
+		dataPoints: <%out.print(dataPoints);%>
+	}]
+});
+chart.render();
+ 
+}
+</script>
 </head>
 <body>
 
@@ -18,7 +82,7 @@
             font-size: medium;
             font: outline;
             margin: 1pt;
-            background-color: FloralWhite;
+            background-color: white;
             padding: 1%;
         }
         h1 {
@@ -75,39 +139,11 @@
 				}
     </style>
 
-    <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
-
-    <%takeHomeInstanceOne.calculateOldTakeHome();%>
-
-    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
-
-    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
-
-    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
-	
-	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
-    <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
-    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
-    <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
-    <%RupeeFormatter rf = new RupeeFormatter();%>
-    <%double nonDiscretionaryExpenses = (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance() + 
-                    ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill() +
-                    ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill() +
-                    ExpenseInstanceOne.getBrokerageMaintenance() + ExpenseInstanceTwo.getBrokerageMaintenance() +
-                    ExpenseInstanceOne.getHomeInsurance() + ExpenseInstanceTwo.getHomeInsurance() +
-                    ExpenseInstanceOne.getCashWithdrawals() + ExpenseInstanceTwo.getCashWithdrawals() +
-                    ExpenseInstanceOne.getGroceryExpenses() + ExpenseInstanceTwo.getGroceryExpenses() +
-                    ExpenseInstanceOne.getTravelExpense() + ExpenseInstanceTwo.getTravelExpense() +
-                    ExpenseInstanceOne.getFamilyExpenses() + ExpenseInstanceTwo.getFamilyExpenses() + 
-                    ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense() + 
-                    ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
-					ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() +
-					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
-					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
-                    ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses())*ExpenseInstanceTwo.getMonthsBetween();%>
-
     <div>
         <h2 align=center>Personal Balance Sheet</h2>
+		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<div id="blankLine" style="height: 25px; width: 100%;"></div>
         <table border=1; align=center>
             <col width="470"> 
             <col width="180"> 
@@ -160,7 +196,7 @@
             <tr><td align="left" >&emsp;&emsp;<%= totalInc.chartOfAccountsList[5].itemDescription%></td>
                 <td align="right"><%= totalInc.chartOfAccountsList[5].cashValueFmtd%></td>
                 <td align="left" >&emsp;&emsp;<%= totalInc.chartOfAccountsList[18].itemDescription%></td>
-                <td align="right"><%= rf.formattedRupee(ft.format(nonDiscretionaryExpenses))%></td>
+                <td align="right"><%= rf.formattedRupee(ft.format(totalInc.chartOfAccountsList[18].cashValue))%></td>
             </tr>
             
             <tr><td align="left" colspan="2"></td>
