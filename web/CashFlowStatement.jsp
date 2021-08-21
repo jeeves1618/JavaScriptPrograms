@@ -100,8 +100,8 @@
 				}
     </style>
 
-    <%CashFlowCalculator CashFlowInstanceOne = new CashFlowCalculator("Ben", "Sal1");%>
-    <%CashFlowCalculator CashFlowInstanceTwo = new CashFlowCalculator("Bun", "Sal1");%>
+    <%CashFlowCalculator CashFlowInstanceOne = new CashFlowCalculator("Two", "Sal1");%>
+    <%CashFlowCalculator CashFlowInstanceTwo = new CashFlowCalculator("One", "Sal1");%>
     <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
@@ -152,14 +152,14 @@
 			<col width="260"> 
 			<col width="260"> 
 			<col width="260"> 
-				<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-					<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<tr><td align="center"><a href="http://localhost:8080/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+					<td align="center"><a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
+					<td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+					<td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+					<td align="center"><a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
 				</tr>
-				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<tr><td align="center" colspan="3"><a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+					<td align="center" colspan="2"><a href="http://localhost:8080/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 				</tr>
          </table>  
 

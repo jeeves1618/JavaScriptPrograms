@@ -71,14 +71,14 @@
 			<col width="260"> 
 			<col width="260"> 
 			<col width="260">
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+            <tr><td align="center"><a href="http://localhost:8080/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+                <td align="center"><a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
+                <td align="center" ><a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
+                <td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
             </tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+			<tr><td align="center" colspan="3"><a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8080/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 			</tr>
 			
         </table>
@@ -118,7 +118,7 @@
 			<col width="260"> 
 			<col width="260"> 
 			<col width="260">
-				<tr><td align="center" colspan="5" color="Ivory"><b><a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Back to Account Payables Summay</a></td></b>
+				<tr><td align="center" colspan="5" color="Ivory"><b><a href="http://localhost:8080/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Back to Account Payables Summay</a></td></b>
 				</tr> 
 			</table>
     </div>

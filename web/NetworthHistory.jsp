@@ -10,6 +10,9 @@
  <%
 		ViewNetworthHistory viewNetworthHistory = new ViewNetworthHistory(); 
 		NetworthHistory[] NetworthHistoryList = viewNetworthHistory.getNetworthHistory();
+		ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
+		String herName = viewChartOfAccounts.getHerName();
+		String hisName = viewChartOfAccounts.getHisName();
 		Gson gsonObj = new Gson();
 		Map<Object,Object> map = null;
 		List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
@@ -34,9 +37,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Networth History</title>
+
 <script type="text/javascript">
+
 window.onload = function() { 
- 
+var herName = "<%out.print(herName);%>";
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,	
 	title: {
@@ -62,13 +67,13 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "spline",
-		name: "Ben",      
+		name: "<%out.print(herName);%>" ,      
 		showInLegend: true,
 		yValueFormatString: "Rs ##,##,##0.00",
 		dataPoints: <%out.print(dataPoints1);%>
 	},{
 		type: "spline",
-		name: "Bun",
+		name: "<%out.print(hisName);%>",
 		showInLegend: true,
 		yValueFormatString: "Rs ##,##,##0.00",
 		dataPoints: <%out.print(dataPoints2);%>
@@ -178,14 +183,14 @@ function toggleDataSeries(e) {
 			<col width="260"> 
 			<col width="260"> 
 			<col width="260">  
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+            <tr><td align="center"><a href="http://localhost:8080/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
+                <td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+                <td align="center"><a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
             </tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+			<tr><td align="center" colspan="3"><a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8080/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 			</tr>
     </table>
 	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
@@ -198,16 +203,16 @@ function toggleDataSeries(e) {
             <col width="250"> 
             <col width="250"> 
             <tr><td align="center"><b>Date</b></td>
-                <td align="center"><b>Ben Amount</b></td>
-				<td align="center"><b>Bun Amount</b></td>
-				<td align="center"><b>Total Amount</b></td>
+                <td align="center" style="color: #0086b3;"><b><%= herName%></b></td>
+				<td align="center" style="color: #cc0000;"><b><%= hisName%></b></td>
+				<td align="center" style="color: #66cc00;"><b>Total</b></td>
 			</tr>
             
 			<%for (networthHistoryIterator = 0; networthHistoryIterator < NetworthHistory.numofElements; networthHistoryIterator++){ %>
 				<tr><td align="center" ><%= NetworthHistoryList[networthHistoryIterator].valueDate%></td>
-					<td align="right" style="padding-left:10px"><%= NetworthHistoryList[networthHistoryIterator].twoAmountFmtd%></td>
-					<td align="right" style="padding-left:10px"><%= NetworthHistoryList[networthHistoryIterator].oneAmountFmtd%></td>
-					<td align="right" style="padding-left:10px"><%= NetworthHistoryList[networthHistoryIterator].totalAmountFmtd%></td>
+					<td align="right" style="padding-left:10px; color: #0086b3;"><%= NetworthHistoryList[networthHistoryIterator].twoAmountFmtd%></td>
+					<td align="right" style="padding-left:10px; color: #cc0000;"><%= NetworthHistoryList[networthHistoryIterator].oneAmountFmtd%></td>
+					<td align="right" style="padding-left:10px; color: #66cc00;"><%= NetworthHistoryList[networthHistoryIterator].totalAmountFmtd%></td>
 				</tr>
             <%}%>
             </table>
