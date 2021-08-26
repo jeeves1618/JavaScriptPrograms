@@ -133,6 +133,11 @@ chart.render();
 					color: black;
 					border: 2px solid #008CBA;
 				}
+		.button3 {
+					background-color: Snow;
+					color: red;
+					border: 2px solid #008CBA;
+				}
 		.button2:hover {
 					background-color: SlateGray;
 					color: white;
@@ -141,6 +146,24 @@ chart.render();
 
     <div>
         <h2 align=center>Personal Balance Sheet</h2>
+		<table border=1; align=center>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+			</tr>
+			<tr><td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
+			</tr>
+		</table>
 		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<div id="blankLine" style="height: 25px; width: 100%;"></div>
@@ -276,23 +299,8 @@ chart.render();
 			<tr>
                 <td align="center" colspan="4"><b>Solvent till <%= totalInc.getSurvivalDateFmtd()%></b></td>
             </tr>
-		</table>
-		<table border=1; align=center>
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-		<col width="260"> 
-			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-			</tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
-			</tr>
-		</table>
+		</table>	
+		
     </div>
 </body>
 </html>

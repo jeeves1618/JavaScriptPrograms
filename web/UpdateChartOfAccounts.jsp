@@ -1,6 +1,7 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>
-<%! int chartOfAccountsIterator; %>
+<% int chartNumber = Integer.parseInt(request.getParameter("chartNumber"));%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,9 +12,8 @@
 <link rel="stylesheet" href="FinancialManagementStyle.css">
 </head>
 <body>
-
     <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
-     ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
+     ChartOfAccounts chartOfAccountsList = viewChartOfAccounts.getChartElement(chartNumber);%>
     
 	<main class="maincontent">
     <div>
@@ -40,12 +40,12 @@
         </table>
         <table class="class2"border=1; align=center>
             <col width="80"> 
-            <col width="470"> 
-            <col width="180"> 
-            <col width="210"> 
+            <col width="450"> 
+            <col width="170"> 
+            <col width="200"> 
 			<col width="150"> 
 			<col width="50">
-			<col width="110">
+			<col width="60">
             <tr><td align="center"><b>Number</b></td>
                 <td align="center"><b>Account Description</b></td>
 				<td align="center"><b>Account Type</b></td>
@@ -55,17 +55,23 @@
 				<td align="center"><b>Actions</b></td>
 			</tr>
             
-			<%for (chartOfAccountsIterator = 0; chartOfAccountsIterator < ChartOfAccounts.numofElements; chartOfAccountsIterator++){ %>
-				<tr><td align="center" ><%= chartOfAccountsList[chartOfAccountsIterator].identificationNumber%></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].itemDescription%></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].typeAssetOrLiability%></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].financialStatement%></td>
-					<td align="right" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].cashValueFmtd%></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].isAssetLiquidInd%></td>
-					<td align="center" style="padding-left:0px"><b><form action="http://localhost:8090/FinancialStatements/UpdateChartOfAccounts.jsp?chartNumber=<%= chartOfAccountsList[chartOfAccountsIterator].identificationNumber%>" method="POST"><input type="submit" value="Update Entry"></form></b></td> 
+				<form action="http://localhost:8090/FinancialStatements/persistChartofAccounts.jsp?chartNumber=<%= chartOfAccountsList.identificationNumber%>" method="POST">
+				<tr><td align="center" ><%= chartOfAccountsList.identificationNumber%></td>
+					<td align="left" style="padding-left:10px"><input type="text" name="itemDescription" value="<%= chartOfAccountsList.itemDescription%>"></td>
+					<td align="left" style="padding-left:10px"><%= chartOfAccountsList.typeAssetOrLiability%></td>
+					<td align="left" style="padding-left:10px"><%= chartOfAccountsList.financialStatement%></td>
+					<td align="right" style="padding-left:10px"><input type="number" name="cashValue" value="<%= chartOfAccountsList.cashValue%>"></td>
+					<td align="left" style="padding-left:10px"><select name="isAssetLiquidInd" id="isAssetLiquidInd">
+						<option value="Y">Yes</option>
+						<option value="N">No</option>
+						</select>
+					<td align="center" style="padding-left:0px"><b><input type="submit" value="Save	"></b></td> 
 				</tr>
-            <%}%>
+				</form>
+            
             </table>
+			&nbsp;
+			<div align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Cancel</a></div>
     </div>
 	</main>
 </body>

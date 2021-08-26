@@ -1,6 +1,10 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>
 <%! int chartOfAccountsIterator; %>
+<% int chartNumber = Integer.parseInt(request.getParameter("chartNumber"));%>
+<% String itemDescription = request.getParameter("itemDescription");%>
+<% double cashValue = Double.parseDouble(request.getParameter("cashValue"));%>
+<% String isAssetLiquidInd = request.getParameter("isAssetLiquidInd");%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,7 +17,10 @@
 <body>
 
     <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
-     ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
+	  ChartOfAccounts chartOfAccountsElement = viewChartOfAccounts.getChartElement(chartNumber);
+	  chartOfAccountsElement.isAssetLiquidInd = "V";
+	  viewChartOfAccounts.updateChartElement(chartNumber, itemDescription, cashValue, isAssetLiquidInd);
+      ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>	  
     
 	<main class="maincontent">
     <div>
@@ -62,7 +69,7 @@
 					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].financialStatement%></td>
 					<td align="right" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].cashValueFmtd%></td>
 					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].isAssetLiquidInd%></td>
-					<td align="center" style="padding-left:0px"><b><form action="http://localhost:8090/FinancialStatements/UpdateChartOfAccounts.jsp?chartNumber=<%= chartOfAccountsList[chartOfAccountsIterator].identificationNumber%>" method="POST"><input type="submit" value="Update Entry"></form></b></td> 
+					<td align="center" style="padding-left:0px"><b><form action="http://localhost:8090/FinancialStatements/UpdateChartOfAccounts.jsp?chartNumber=<%= chartOfAccountsList[chartOfAccountsIterator].identificationNumber%>" method="POST"><input type="submit" value="Update Amount"></form></b></td> 
 				</tr>
             <%}%>
             </table>

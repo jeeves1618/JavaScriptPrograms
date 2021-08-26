@@ -1,77 +1,16 @@
 <%@page import="IncomeStatement.*"%>
 <%@page import="BalanceSheet.*"%>
+<%@page import="ViewServices.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="FinancialManagementStyle.css">
 <title>Personal Financial Statement</title>
 </head>
 <body>
-
-    <style type="text/css">
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: medium;
-            font: outline;
-            margin: 1pt;
-            background-color: FloralWhite;
-            padding: 1%;
-        }
-        h1 {
-            font-size: x-large;
-        }
-        h2 {
-            font-size: large;
-        }
-		/*
-        .split {
-                height: 100%;
-                width: 73.1%;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                overflow-x: hidden;
-                padding-top: 2px;
-                }
-
-        .left {
-        left: 0;
-        background-color: #FCF3CF;
-        padding: 5px;
-        }
-
-        .right {
-        right: 0;
-        width: 28.5%;
-        text-align: right;
-        padding: 5px;
-        background-color:#EAFAF1;
-        }
-		*/
-		.button {
-				  border: none;
-				  color: white;
-				  padding: 2px 2px;
-				  text-align: center;
-				  text-decoration: none;
-				  display: inline-block;
-				  font-size: medium;
-				  margin: 0px 0px;
-				  transition-duration: 0.4s;
-				  cursor: pointer;
-				 }
-		.button2 {
-					background-color: Snow;
-					color: black;
-					border: 2px solid #008CBA;
-				}
-		.button2:hover {
-					background-color: SlateGray;
-					color: white;
-				}
-    </style>
 
     <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
 
@@ -82,13 +21,33 @@
     <%takeHomeInstanceTwo.calculateOldTakeHome();%>
 
     <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
+	<%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
+		String herName = viewChartOfAccounts.getHerName();
+		String hisName = viewChartOfAccounts.getHisName();%>
     <div>
         <h2 align=center>Account Receivables</h2>
-        
+        <table border=1; align=center>
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+			<col width="260"> 
+				<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+					<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
+					<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				</tr>
+				<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
+					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+					<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+					<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				</tr>
+         </table>  
         <table border=1; align=center>
 			<col width="1100"> 
-            <col width="180"> 
-            <tr><td align="center" colspan="2"><b>Salary Two</b></td></tr>
+            <col width="205"> 
+            <tr><td align="center" colspan="2" ><b><%= herName%>'s Salary</b></td></tr>
             <tr>
                <td align="left">Annual Salary     </td>
                <td align="right"><%= takeHomeInstanceOne.getAnnualSalaryFmtd()%></td>
@@ -119,7 +78,7 @@
                 <td align="right"><%= takeHomeInstanceOne.getMonthlyTakeHomeFmtd()%></td>
             </tr>
          
-            <tr><td align="center" colspan="2"><b>Salary One</b></td></tr>
+            <tr><td align="center" colspan="2"><b><%= hisName%>'s Salary</b></td></tr>
             <tr>
                <td align="left">Annual Salary     </td>
                <td align="right"><%= takeHomeInstanceTwo.getAnnualSalaryFmtd()%></td>
@@ -149,7 +108,7 @@
                 <td align="left">Monthly Take Home</td>
                 <td align="right"><%= takeHomeInstanceTwo.getMonthlyTakeHomeFmtd()%></td>
             </tr>
-            <tr><td align="center" colspan="2"><b>Cash Flow Summary</b></td></tr>
+            <tr><td align="center" colspan="2"><b>Summary of Receivables</b></td></tr>
             <tr>
                <td align="left">Interest Income    </td>
                <td align="right"><%= totalInc.getRentalIncomeTwoFmtd()%></td>
@@ -189,22 +148,6 @@
                 <td align="center" colspan="2"><b>Solvent till <%= totalInc.getSurvivalDateFmtd()%></b></td>
             </tr>
 			</table>
-			<table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-				<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-					<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-					<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
-					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-				</tr>
-				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
-				</tr>
-         </table>  
 
     </div> 
 	

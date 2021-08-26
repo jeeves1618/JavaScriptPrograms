@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>View Payables Entries</title>
+<title>Unknown Transactions</title>
 <link rel="stylesheet" href="FinancialManagementStyle.css">
 </head>
 <body>
@@ -24,10 +24,13 @@
 	  AccountStatement temp;
 	  entrySerialNumber = 1;
 	  withdrawalAmount = 0;
-	  depositAmount = 0;%>
+	  depositAmount = 0;
+	  
+	  ViewNaturalLanguageProcessor NLP = new ViewNaturalLanguageProcessor();
+	  NaturalLanguageProcessor N = NLP.getTokenEntry(9999999);%>
     
     <div>
-        <h2 align=center>Entries under <%= entryCategory%></h2>
+        <h2 align=center><%= entryCategory%> Transactions</h2>
 		<table border=1; align=center>
 			<col width="260"> 
 			<col width="260"> 
@@ -50,23 +53,27 @@
         <table border=1; align=center>
             <col width="50"> 
             <col width="150"> 
-            <col width="700"> 
-            <col width="200"> 
-			<col width="200"> 
+            <col width="600"> 
+            <col width="175"> 
+			<col width="175"> 
+			<col width="150"> 
             <tr><td align="center"><b>S.No</b></td>
                 <td align="center"><b>Transaction Date</b></td>
 				<td align="center"><b>Transaction Remarks</b></td>
 				<td align="center"><b>Deposit Amount</b></td>
 				<td align="center"><b>Withdrawal Amount</b></td>
+				<td align="center"><b>Actions</b></td>
 			</tr>
             
 			<%while (requestIterator.hasNext()) {
             temp = requestIterator.next(); %>
 				<tr><td align="center" ><%= entrySerialNumber%></td>
 					<td align="left" style="padding-left:10px"><%= temp.transactionDate%></td>
-					<td align="left" style="padding-left:10px"><%= temp.transactionRemarks%></td>
+					<td align="left" style="padding-left:10px" ><%= temp.transactionRemarks%></td>
 					<td align="right" style="padding-left:10px"><%= rf.formattedRupee(ft.format(temp.depositAmount))%></td>
 					<td align="right" style="padding-left:10px"><%= rf.formattedRupee(ft.format(temp.withdrawalAmount))%></td>
+									  
+					<td align="center"><form action="http://localhost:8090/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%=N.identificationNumber%>&operation=Categorize&txnRemarks=<%= temp.transactionRemarks%>" method="POST"><input type="submit" value="Categorize Entry"></form></td>
 				</tr>
 				<%entrySerialNumber = entrySerialNumber + 1;
 				  depositAmount = depositAmount + temp.depositAmount;
@@ -75,6 +82,7 @@
 			<tr><td align="center" colspan="3"><b>Totals</b></td>
 				<td align="right"><%= rf.formattedRupee(ft.format(depositAmount))%></td>
 				<td align="right"><%= rf.formattedRupee(ft.format(withdrawalAmount))%></td>
+				<td align="right">&nbsp</td>
 			</tr>
             </table>
 			<table border=1; align=center>

@@ -1,6 +1,7 @@
 <%@page import="IncomeStatement.*"%>
 <%@page import="CommonModules.*"%>
 <%@page import="PerformanceAnalyzer.*"%>	
+<%@page import="ViewServices.*"%>
 <%@ page import="com.google.gson.*"%>
 <%@page import="java.text.*"%>
 <%@ page import="java.util.*" %>
@@ -9,7 +10,10 @@
  <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
 	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
 	<%GainsCalculator GainsInstanceOne = new GainsCalculator("One", "Sav1");%>
-    <%GainsCalculator GainsInstanceTwo = new GainsCalculator("Two", "Sav1");%>
+    <%GainsCalculator GainsInstanceTwo = new GainsCalculator("Two", "Sav1");
+	ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
+		String herName = viewChartOfAccounts.getHerName();
+		String hisName = viewChartOfAccounts.getHisName();%>
     <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
@@ -106,6 +110,11 @@ chart.render();
 					color: black;
 					border: 2px solid #008CBA;
 				}
+		.button3 {
+					background-color: Snow;
+					color: red;
+					border: 2px solid #008CBA;
+				}
 		.button2:hover {
 					background-color: SlateGray;
 					color: white;
@@ -130,8 +139,10 @@ chart.render();
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
                 <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
             </tr>
-			<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+			<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
+				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 			</tr>
         </table>
 		<div id="blankLine" style="height: 25px; width: 100%;"></div>
@@ -145,24 +156,24 @@ chart.render();
             <col width="180">  
             <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 			<a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp" class="button button2">Yearly View</button></td></tr>
-            <tr><td align="center" colspan="2"><b>Ben - Monthly Summary</b></td>
-                <td align="center" colspan="2"><b>Bun - Monthly Summary</b></td></tr>
+            <tr><td align="center" colspan="2"><b><%= herName%> - Monthly Summary</b></td>
+                <td align="center" colspan="2"><b><%= hisName%> - Monthly Summary</b></td></tr>
                         
-            <tr><td align="left" >Ben Income</td>
+            <tr><td align="left" ><%= herName%>'s Income</td>
                 <td align="right"><%= ExpenseInstanceOne.getTotalIncomeFmtd()%></td>
-                <td align="left" >Bun Income</td>
+                <td align="left" ><%= hisName%>'s Income</td>
                 <td align="right"><%= ExpenseInstanceTwo.getTotalIncomeFmtd()%></td>
             </tr>
             
-            <tr><td align="left" >Ben Expenses</td>
+            <tr><td align="left" ><%= herName%>'s Expenses</td>
                 <td align="right"><%= ExpenseInstanceOne.getTotalExpensesFmtd()%></td>
-                <td align="left" >Bun Expenses</td>
+                <td align="left" ><%= hisName%>'s Expenses</td>
                 <td align="right"><%= ExpenseInstanceTwo.getTotalExpensesFmtd()%></td>
             </tr>
 
-            <tr><td align="left" >Ben Savings</td>
+            <tr><td align="left" ><%= herName%>'s Savings</td>
                 <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceOne.getTotalIncome() - ExpenseInstanceOne.getTotalExpenses()))%></td>
-                <td align="left" >Bun Savings</td>
+                <td align="left" ><%= hisName%>'s Savings</td>
                 <td align="right"><%= rf.formattedRupee(ft.format(ExpenseInstanceTwo.getTotalIncome() - ExpenseInstanceTwo.getTotalExpenses()))%></td>
             </tr>
 

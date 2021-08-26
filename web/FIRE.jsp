@@ -7,7 +7,8 @@
 <%@page import="java.time.*"%>
 <%! int fireIterator, currentYear, moreYears; %>
 <%! long twentyXtime = 0, twentyFiveXtime = 0, fiftyXtime = 0, seventyFiveXtime = 0, hundredXtime = 0, monthCalc = 0; %>
-<%! double inflationRate, rateOfReturn, annualWithdrawals, netSavings, twentyX, twentyFiveX, fiftyX, seventyFiveX, hundredX, twentyXETA, networthGrowth;%>
+<%! double inflationRate, rateOfReturn, annualWithdrawals, netSavings, twentyX, twentyFiveX, fiftyX, seventyFiveX, hundredX, twentyXETA, networthGrowth;
+	boolean twentyXpast, twentyFiveXpast, fiftyXpast, seventyFiveXpast, hundredXpast;%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
 <% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
@@ -18,98 +19,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="FinancialManagementStyle.css">
 <title>Personal Financial Statement</title>
 </head>
 <body>
 
-    <style type="text/css">
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: medium;
-            font: outline;
-            margin: 1pt;
-            background-color: FloralWhite;
-            padding: 1%;
-        }
-        h1 {
-            font-size: x-large;
-        }
-        h2 {
-            font-size: large;
-        }
-		/*
-        .split {
-                height: 100%;
-                width: 73.1%;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                overflow-x: hidden;
-                padding-top: 2px;
-                }
-
-        .left {
-        left: 0;
-        background-color: #FCF3CF;
-        padding: 5px;
-        }
-
-        .right {
-        right: 0;
-        width: 28.5%;
-        text-align: right;
-        padding: 5px;
-        background-color:#EAFAF1;
-        }
-		/* Tooltip container */
-		.tooltip {
-		  position: relative;
-		  display: inline-block;
-		  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-		}
-
-		/* Tooltip text */
-		.tooltip .tooltiptext {
-		  visibility: hidden;
-		  width: 320px;
-		  background-color: white;
-		  color: black;
-		  text-align: center;
-		  padding: 5px 0;
-		  border-radius: 6px;
-		 
-		  /* Position the tooltip text - see examples below! */
-		  position: absolute;
-		  z-index: 1;
-		}
-
-		/* Show the tooltip text when you mouse over the tooltip container */
-		.tooltip:hover .tooltiptext {
-		  visibility: visible;
-		}
-		*/
-		.button {
-				  border: none;
-				  color: white;
-				  padding: 2px 2px;
-				  text-align: center;
-				  text-decoration: none;
-				  display: inline-block;
-				  font-size: medium;
-				  margin: 0px 0px;
-				  transition-duration: 0.4s;
-				  cursor: pointer;
-				 }
-		.button2 {
-					background-color: Snow;
-					color: black;
-					border: 2px solid #008CBA;
-				}
-		.button2:hover {
-					background-color: SlateGray;
-					color: white;
-				}
-    </style>
 	<% inflationRate = Double.parseDouble(request.getParameter("inflation_rate"));
 	   rateOfReturn = Double.parseDouble(request.getParameter("return_rate"));
 	   moreYears = Integer.parseInt(request.getParameter("more_years"));%>
@@ -159,10 +73,16 @@
 	  twentyFiveX = 25 * nonDiscretionaryExpenses * monthsInBetween; 
 	  fiftyX = 50 * nonDiscretionaryExpenses * monthsInBetween; seventyFiveX = 75 * nonDiscretionaryExpenses * monthsInBetween; hundredX = 100 * nonDiscretionaryExpenses * monthsInBetween;
 	  double twentyXETA = (hundredX - totalLiquidAssets)/(netSavings*monthsInBetween);
-	  twentyXtime = 0; twentyFiveXtime = 0; fiftyXtime = 0; seventyFiveXtime = 0; hundredXtime = 0; monthCalc = 0; 
+	  twentyXtime = 0; twentyFiveXtime = 0; fiftyXtime = 0; seventyFiveXtime = 0; hundredXtime = 0; monthCalc = 0;
+	  twentyXpast = false; twentyFiveXpast = false; fiftyXpast = false; seventyFiveXpast = false; hundredXpast = false;
 	   
 	  while (networthGrowth <= hundredX)
 	  {	
+		  if (networthGrowth > twentyX) twentyXpast = false;
+		  if (networthGrowth > twentyFiveX) twentyFiveXpast = false;
+		  if (networthGrowth > fiftyX) fiftyXpast = false;
+		  if (networthGrowth > seventyFiveX) seventyFiveXpast = false;
+		  if (networthGrowth > hundredX) hundredXpast = false;
 		  if (monthCalc == 12)
 		  {
 			  networthGrowth = networthGrowth * (1+(rateOfReturn/100));
@@ -188,6 +108,11 @@
 		  else if (hundredXtime == 0 && networthGrowth > hundredX)
 			  hundredXtime = fireIterator;
 	  }
+	  if (twentyXpast == true) twentyXtime = 0;
+	  if (twentyFiveXpast == true) twentyFiveXtime = 0;
+	  if (fiftyXpast == true) fiftyXtime = 0;
+	  if (seventyFiveXpast == true) seventyFiveXtime = 0;
+	  if (hundredXpast == true) hundredXtime = 0;
 	  %>
     <div>
         <h2 align=center>Financial Independence and Retiring Early</h2>
@@ -204,8 +129,10 @@
 					<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
 					<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
 				</tr>
-				<tr><td align="center" colspan="3"><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
+					<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
+					<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+					<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
 				</tr>
         </table> 
 		 
@@ -304,27 +231,27 @@
 			<tr><td align="center"><b>Milestones at a return of <%= rateOfReturn%>% and an inflation of <%= inflationRate%>%</b></td><td align="center"><b>Target Networth</b></td><td align="center"><b>Networth Shortfall</b></td><td align="center"><b>Expected Date</b></td></tr>
 			<tr><td align="left">Target Networth, Shortfall and Expected date for achieving 20X</td>
 				<td align="right"><%= rf.formattedRupee(ft.format(twentyX))%>&emsp;</b></td>
-				<td align="right"><%= rf.formattedRupee(ft.format(twentyX - totalLiquidAssets ))%>&emsp;</b></td>
+				<td align="right"><%= rf.formattedRupee(ft.format(Math.max((twentyX - totalLiquidAssets ),0.0)))%>&emsp;</b></td>
 				<td align="center"><%= LocalDate.now().plusMonths(twentyXtime) %>&emsp;</td>
 			</tr>
 			<tr><td align="left">Target Networth, Shortfall and Expected date for achieving 25X</td>
 				<td align="right"><%= rf.formattedRupee(ft.format(twentyFiveX))%>&emsp;</b></td>
-				<td align="right"><%= rf.formattedRupee(ft.format(twentyFiveX - totalLiquidAssets ))%>&emsp;</b></td>
+				<td align="right"><%= rf.formattedRupee(ft.format(Math.max((twentyFiveX - totalLiquidAssets ),0.0)))%>&emsp;</b></td>
 				<td align="center"><%= LocalDate.now().plusMonths(twentyFiveXtime) %>&emsp;</td>
 			</tr>
 			<tr><td align="left">Target Networth, Shortfall and Expected date for achieving 50X</td>
 				<td align="right"><%= rf.formattedRupee(ft.format(fiftyX))%>&emsp;</b></td>
-				<td align="right"><%= rf.formattedRupee(ft.format(fiftyX - totalLiquidAssets ))%>&emsp;</b></td>
+				<td align="right"><%= rf.formattedRupee(ft.format(Math.max((fiftyX - totalLiquidAssets),0.0)))%>&emsp;</b></td>
 				<td align="center"><%= LocalDate.now().plusMonths(fiftyXtime) %>&emsp;</td>
 			</tr>
 			<tr><td align="left">Target Networth, Shortfall and Expected date for achieving 75X</td>
 				<td align="right"><%= rf.formattedRupee(ft.format(seventyFiveX))%>&emsp;</b></td>
-				<td align="right"><%= rf.formattedRupee(ft.format(seventyFiveX - totalLiquidAssets ))%>&emsp;</b>
+				<td align="right"><%= rf.formattedRupee(ft.format(Math.max((seventyFiveX - totalLiquidAssets),0.0)))%>&emsp;</b>
 				</td><td align="center"><%= LocalDate.now().plusMonths(seventyFiveXtime) %>&emsp;</td>
 			</tr>
 			<tr><td align="left">Target Networth, Shortfall and Expected date for achieving 100X</td>
 				<td align="right"><%= rf.formattedRupee(ft.format(hundredX))%>&emsp;</b></td>
-				<td align="right"><%= rf.formattedRupee(ft.format(hundredX - totalLiquidAssets ))%>&emsp;</b></td>
+				<td align="right"><%= rf.formattedRupee(ft.format(Math.max((hundredX - totalLiquidAssets),0.0)))%>&emsp;</b></td>
 				<td align="center"><%= LocalDate.now().plusMonths(hundredXtime) %>&emsp;</td>
 			</tr>				 
 		</table>
