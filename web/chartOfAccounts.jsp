@@ -1,5 +1,7 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>
+<%@page import="IncomeStatement.*"%>
+<%@page import="java.text.*"%>
 <%! int chartOfAccountsIterator; %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
@@ -13,31 +15,35 @@
 <body>
 
     <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
-     ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();%>
+     ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();
+	 DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");
+     RupeeFormatter rf = new RupeeFormatter();
+	 ExpenseCalculator e1 = new ExpenseCalculator("Two", "Sal1");
+     ExpenseCalculator e2 = new ExpenseCalculator("One", "Sal1");%>
     
 	<main class="maincontent">
     <div>
         <h2 align=center>Chart of Accounts</h2>
 		<table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260">
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-            </tr>
-			<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
 				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
-			 <tr><td align="left" colspan="5" color="Ivory"><b>&nbsp;</b>
-            </tr>
-        </table>
+			<tr>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+			</tr>
+		</table>
         <table class="class2"border=1; align=center>
             <col width="80"> 
             <col width="470"> 
@@ -55,7 +61,12 @@
 				<td align="center"><b>Actions</b></td>
 			</tr>
             
-			<%for (chartOfAccountsIterator = 0; chartOfAccountsIterator < ChartOfAccounts.numofElements; chartOfAccountsIterator++){ %>
+			<%for (chartOfAccountsIterator = 0; chartOfAccountsIterator < ChartOfAccounts.numofElements; chartOfAccountsIterator++){ 
+			if(chartOfAccountsList[chartOfAccountsIterator].subType.equals("Account Payables") && chartOfAccountsList[chartOfAccountsIterator].itemDescription.equals("HouseHoldExpenses")) {
+                chartOfAccountsList[chartOfAccountsIterator].cashValue = e1.getTotalNonDiscretionExpenses()+ e2.getTotalNonDiscretionExpenses();
+                chartOfAccountsList[chartOfAccountsIterator].cashValueFmtd = rf.formattedRupee(ft.format((e1.getTotalNonDiscretionExpenses()+ e2.getTotalNonDiscretionExpenses())/e1.getMonthsBetween()*12));
+			}			
+			%>
 				<tr><td align="center" ><%= chartOfAccountsList[chartOfAccountsIterator].identificationNumber%></td>
 					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].itemDescription%></td>
 					<td align="left" style="padding-left:10px"><%= chartOfAccountsList[chartOfAccountsIterator].typeAssetOrLiability%></td>

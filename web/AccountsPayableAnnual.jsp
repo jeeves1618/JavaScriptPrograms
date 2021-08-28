@@ -101,22 +101,34 @@ chart.render();
 				  text-decoration: none;
 				  display: inline-block;
 				  font-size: medium;
+				  
 				  margin: 0px 0px;
 				  transition-duration: 0.4s;
 				  cursor: pointer;
 				 }
+		.button1 {
+					background-color: Snow;
+					color: black;
+					border: 2px solid #008CBA;
+				}
 		.button2 {
 					background-color: Snow;
 					color: black;
 					border: 2px solid #008CBA;
+					width: 90%;
 				}
 		.button3 {
 					background-color: Snow;
 					color: red;
 					border: 2px solid #008CBA;
+					width: 90%;
 				}
 		.button2:hover {
 					background-color: SlateGray;
+					color: white;
+				}
+		.button3:hover {
+					background-color: red;
 					color: white;
 				}
     </style>
@@ -128,23 +140,25 @@ chart.render();
     <div>
         <h2 align=center> Accounts Payables Yearly</h2>
 		<table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260">  
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-            </tr>
-			<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
 				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
-        </table>
+			<tr>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+			</tr>
+		</table>
 		<div id="blankLine" style="height: 25px; width: 100%;"></div>	
 		<div class="center"; id="chartContainer"; style="height: 470px; width: 69.99%;"></div>
 		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -155,7 +169,7 @@ chart.render();
             <col width="471"> 
             <col width="180">  
             <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Monthly View</button></td></tr>
+			<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button1">Monthly View</button></td></tr>
             <tr><td align="center" colspan="2"><b><%= herName%> - Annual Summary</b></td>
                 <td align="center" colspan="2"><b><%= hisName%> - Annual Summary</b></td></tr>
                         
@@ -260,8 +274,8 @@ chart.render();
                         
             <tr><td align="left" > </td>
                 <td align="right"> </td>
-                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Investments">Home Improvement</a></td></td>
-                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Monthly%20EMI">Home Loan EMIs</a></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 
 			<tr><td align="left" > </td>
@@ -279,8 +293,8 @@ chart.render();
 						
             <tr><td align="left" > </td>
                 <td align="right"> </td>
-                <td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Monthly%20EMI">Home Loan EMIs</a></td>
-                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
+				<td align="left" ><a href="http://localhost:8090/FinancialStatements/ViewPayablesDrilldown.jsp?entry_category=Investments">Home Improvement</a></td></td>
+                <td align="right"><%= rf.formattedRupee(ft.format((ExpenseInstanceOne.getTotalInvestments() + ExpenseInstanceTwo.getTotalInvestments()) * ExpenseInstanceOne.getMonthsBetween()))%></td>
             </tr>
 			
 			<tr><td align="left" > </td>

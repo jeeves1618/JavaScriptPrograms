@@ -48,22 +48,34 @@
 				  text-align: center;
 				  text-decoration: none;
 				  display: inline-block;
-				  font-size: medium;
+				  font-size: medium;				  
 				  margin: 0px 0px;
 				  transition-duration: 0.4s;
 				  cursor: pointer;
 				 }
+		.button1 {
+					background-color: Snow;
+					color: black;
+					border: 2px solid #008CBA;					
+				}
 		.button2 {
 					background-color: Snow;
 					color: black;
 					border: 2px solid #008CBA;
+					width: 90%;
 				}
 		.button3 {
 					background-color: Snow;
 					color: red;
 					border: 2px solid #008CBA;
+					width: 90%;
 				}
 		.button2:hover {
 					background-color: SlateGray;
 					color: white;
 				}
+		.button3:hover {
+					background-color: red;
+					color: white;
+				}
+		

@@ -18,10 +18,10 @@
     <%
 	 ViewNaturalLanguageProcessor viewNLP = new ViewNaturalLanguageProcessor(); 
      NaturalLanguageProcessor NLPToken = viewNLP.getTokenEntry(tokenNumber);
-	 if (operation.equals("Add")) {
-		 cancelURL = "http://localhost:8090/FinancialStatements/manageNLP.jsp";
-	 } else {
+	 if (operation.equals("Categorize")) {
 		 cancelURL = "http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown";
+	 } else {
+		 cancelURL = "http://localhost:8090/FinancialStatements/manageNLP.jsp";
 	 }
 	 %>
 	     
@@ -29,25 +29,25 @@
     <div>
         <h2 align=center>Natural Language Processor Tokens</h2>
 		<table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260">
-            <tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-                <td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp" class="button button2">Networth History</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-                <td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-            </tr>
-			<tr><td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
-				<td align="center" colspan="2"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
 				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
-			 <tr><td align="left" colspan="5" color="Ivory"><b>&nbsp;</b>
-            </tr>
-        </table>
+			<tr>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+			</tr>
+		</table>
         <table class="class2"border=1; align=center>
             <col width="40"> 
             <col width="80"> 
@@ -123,7 +123,8 @@
             
             </table>
 			&nbsp;
-			<div align="center"><a href="<%= cancelURL%>" class="button button2">Cancel</a></div>
+			</form>
+			<div align="center"><form action="<%= cancelURL%>" method="POST"><input type="submit" value="Cancel"></form></div>
     </div>
 	</main>
 </body>

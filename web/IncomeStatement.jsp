@@ -63,6 +63,7 @@
 				  display: inline-block;
 				  font-size: medium;
 				  margin: 0px 0px;
+				  width: 90%;
 				  transition-duration: 0.4s;
 				  cursor: pointer;
 				 }
@@ -82,6 +83,26 @@
    
     <div>
         <h2 align=center>Networth History</h2>
+		<table border=1; align=center>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+			</tr>
+		</table>
         <table class="class2"border=1; align=center>
             <col width="221"> 
             <col width="250"> 
@@ -101,23 +122,6 @@
 				</tr>
             <%}%>
             </table>
-        <table border=1; align=center>
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260"> 
-			<col width="260">  
-            <tr><td align="center"><a href="http://localhost:8080/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-				<td align="center" ><a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</a></td>
-                <td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-                <td align="center"><a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-            </tr>
-			<tr><td align="center" colspan="1"><a href="http://localhost:8080/FinancialStatements/manageNLP.jsp" class="button button2">NLP Tokens</a></td>
-				<td align="center" colspan="3"><a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">Financial Independence and Early Retirement</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8080/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
-			</tr>
-        </table>
     </div>	
 	
 </body>
