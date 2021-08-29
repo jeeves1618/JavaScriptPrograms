@@ -2,6 +2,7 @@
 <%@page import="CashFlowStatement.*"%>
 <%@page import="IncomeStatement.*"%>
 <%@page import="BalanceSheet.*"%>
+<%@page import="ViewServices.*"%>
 <%@page import="java.text.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.time.*"%>
@@ -23,7 +24,29 @@
 <title>Personal Financial Statement</title>
 </head>
 <body>
-
+    <div>
+        <h2 align=center>Financial Independence and Retiring Early</h2>
+        
+		<table border=1; align=center>
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+        <col width="260"> 
+		<col width="260"> 
+			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
+				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
+				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
+				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
+			</tr>
+		</table>
 	<% inflationRate = Double.parseDouble(request.getParameter("inflation_rate"));
 	   rateOfReturn = Double.parseDouble(request.getParameter("return_rate"));
 	   moreYears = Integer.parseInt(request.getParameter("more_years"));%>
@@ -34,38 +57,25 @@
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
 	
-	<%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
+	<%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
+		String herName = viewChartOfAccounts.getHerName();
+		String hisName = viewChartOfAccounts.getHisName();%>
+    <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator(herName + "'s salary");%>
 
-    <%takeHomeInstanceOne.calculateOldTakeHome();%>
+    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator(hisName + "'s salary");%>
 
-    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
 
-    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
-
-    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
-	<%double nonDiscretionaryInflationaryExpenses = (ExpenseInstanceOne.getApartmentMaintenance() + ExpenseInstanceTwo.getApartmentMaintenance() + 
-                    ExpenseInstanceOne.getElectricityBill() + ExpenseInstanceTwo.getElectricityBill() +
-                    ExpenseInstanceOne.getCreditCardBill() + ExpenseInstanceTwo.getCreditCardBill() +
-                    ExpenseInstanceOne.getBrokerageMaintenance() + ExpenseInstanceTwo.getBrokerageMaintenance() +
-                    ExpenseInstanceOne.getHomeInsurance() + ExpenseInstanceTwo.getHomeInsurance() +
-                    ExpenseInstanceOne.getCashWithdrawals() + ExpenseInstanceTwo.getCashWithdrawals() +
-                    ExpenseInstanceOne.getGroceryExpenses() + ExpenseInstanceTwo.getGroceryExpenses() +
-                    ExpenseInstanceOne.getTravelExpense() + ExpenseInstanceTwo.getTravelExpense() +
-                    ExpenseInstanceOne.getFamilyExpenses() + ExpenseInstanceTwo.getFamilyExpenses() + 
-                    ExpenseInstanceOne.getShoppingExpense() + ExpenseInstanceTwo.getShoppingExpense() + 
-                    ExpenseInstanceOne.getHousekeepingExpenses() + ExpenseInstanceTwo.getHousekeepingExpenses() + 
-					ExpenseInstanceOne.getEducationExpenses() + ExpenseInstanceTwo.getEducationExpenses() +
-					ExpenseInstanceOne.getdHealthCareExpenses() + ExpenseInstanceTwo.getdHealthCareExpenses() +
-                    ExpenseInstanceOne.getEntertainmentExpenses() + ExpenseInstanceTwo.getEntertainmentExpenses() 
-                    );
-		double nonDiscretionaryNonInflationaryExpenses = ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI();
-		double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses;%>
+    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.calculateOldTakeHome(), takeHomeInstanceOne.calculateOldTakeHome());%>
+	<%long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();
+	  double nonDiscretionaryInflationaryExpenses = (ExpenseInstanceOne.getTotalNonDiscretionExpenses() + ExpenseInstanceTwo.getTotalNonDiscretionExpenses())/12;
+	  double nonDiscretionaryNonInflationaryExpenses = ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI();
+	  double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses;%>
 	<%double totalLiquidAssets = totalInc.getTotalLiquidAssets();
 	  double totalLiquidAssetsROR1 = totalLiquidAssets;
 	  double totalLiquidAssetsROR2 = totalLiquidAssets;
 	  double totalLiquidAssetsROR3 = totalLiquidAssets;	  
 	  networthGrowth = totalLiquidAssets;	  
-	  long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();
+	  
 	  currentYear = Calendar.getInstance().get(Calendar.YEAR);
 	  double netSavings = totalInc.getNetSavings();
 	  double netSavingsGrowth = netSavings;
@@ -113,31 +123,7 @@
 	  if (fiftyXpast == true) fiftyXtime = 0;
 	  if (seventyFiveXpast == true) seventyFiveXtime = 0;
 	  if (hundredXpast == true) hundredXtime = 0;
-	  %>
-    <div>
-        <h2 align=center>Financial Independence and Retiring Early</h2>
-        </table>
-			<table border=1; align=center>
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-		<col width="260"> 
-			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
-			</tr>
-			<tr>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
-				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
-			</tr>
-		</table>
-		 
+	  %> 
         <table border=1; align=center>
             <col width="944"> 
             <col width="360"> 

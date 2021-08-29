@@ -11,19 +11,15 @@
 <title>Personal Financial Statement</title>
 </head>
 <body>
-
-    <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
-
-    <%takeHomeInstanceOne.calculateOldTakeHome();%>
-
-    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
-
-    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
-
-    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
 	<%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
 		String herName = viewChartOfAccounts.getHerName();
 		String hisName = viewChartOfAccounts.getHisName();%>
+    <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator(herName + "'s salary");%>
+
+    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator(hisName + "'s salary");%>
+
+    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.calculateOldTakeHome(), takeHomeInstanceOne.calculateOldTakeHome());%>
+	
     <div>
         <h2 align=center>Account Receivables</h2>
         <table border=1; align=center>

@@ -1,20 +1,15 @@
 <%@page import="IncomeStatement.*"%>
 <%@page import="BalanceSheet.*"%>
 <%@page import="CommonModules.*"%>
+<%@page import="ViewServices.*"%>
 <%@page import="java.text.*"%>
 <%@ page import="com.google.gson.*"%>
 <%@ page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
- <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator("SalaryTwo");%>
+	
 
-    <%takeHomeInstanceOne.calculateOldTakeHome();%>
-
-    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator("SalaryOne");%>
-
-    <%takeHomeInstanceTwo.calculateOldTakeHome();%>
-
-    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.getmonthlyTakeHome(), takeHomeInstanceOne.getmonthlyTakeHome());%>
+    <%buildBalanceSheet totalInc = new buildBalanceSheet(0, 0);%>
 	
 	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
     <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
