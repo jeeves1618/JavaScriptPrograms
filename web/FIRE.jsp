@@ -6,6 +6,7 @@
 <%@page import="java.text.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.time.*"%>
+<%@page import="admin.*"%>
 <%! int fireIterator, currentYear, moreYears; %>
 <%! long twentyXtime = 0, twentyFiveXtime = 0, fiftyXtime = 0, seventyFiveXtime = 0, hundredXtime = 0, monthCalc = 0; %>
 <%! double inflationRate, rateOfReturn, annualWithdrawals, netSavings, twentyX, twentyFiveX, fiftyX, seventyFiveX, hundredX, twentyXETA, networthGrowth;
@@ -36,7 +37,7 @@
 			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
 			<tr>
@@ -52,7 +53,8 @@
 	   moreYears = Integer.parseInt(request.getParameter("more_years"));%>
 	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
     <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
-    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
+    <%String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	  DecimalFormat ft = new DecimalFormat(currencyFormat);%>
 	<%DecimalFormat mt = new DecimalFormat("##,##,##0.00");%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
@@ -208,7 +210,7 @@
 						<option value=40>40</option>
 					  </select>	
 					  <input type="submit" value="Recalculate">	&emsp;</b></td>
-					  </form
+					  </form>
 				</tr> 
 		</table>
 		<table border=1; align=center>

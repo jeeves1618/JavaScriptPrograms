@@ -1,5 +1,6 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>	
+<%@page import="admin.*"%>
 <%! int networthHistoryIterator;	 %>
 <%String operation = request.getParameter("operation");
 int serialNumber;
@@ -11,6 +12,7 @@ int serialNumber;
  pageEncoding="ISO-8859-1"%>
  
  <%
+		String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
 		ViewNetworthHistory viewNetworthHistory = new ViewNetworthHistory(); 
 		if (operation.equals("Add Entry")||operation.equals("Update")){
 			serialNumber = Integer.parseInt(request.getParameter("sNo"));
@@ -84,19 +86,19 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		type: "spline",
 		name: "<%out.print(herName);%>" ,      
 		showInLegend: true,
-		yValueFormatString: "Rs ##,##,##0.00",
+		yValueFormatString: "<%out.print(currencyFormat);%>" ,
 		dataPoints: <%out.print(dataPoints1);%>
 	},{
 		type: "spline",
 		name: "<%out.print(hisName);%>",
 		showInLegend: true,
-		yValueFormatString: "Rs ##,##,##0.00",
+		yValueFormatString: "<%out.print(currencyFormat);%>" ,
 		dataPoints: <%out.print(dataPoints2);%>
 	},{
 		type: "spline",
 		name: "Total",
 		showInLegend: true,
-		yValueFormatString: "Rs ##,##,##0.00",
+		yValueFormatString: "<%out.print(currencyFormat);%>" ,
 		dataPoints: <%out.print(dataPoints3);%>
 	}]
 });
@@ -140,7 +142,7 @@ function toggleDataSeries(e) {
 			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
 			<tr>

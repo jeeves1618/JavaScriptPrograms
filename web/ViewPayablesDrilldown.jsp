@@ -1,5 +1,6 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>
+<%@page import="admin.*"%>
 <%@page import="java.text.* "%>
 <%! int entrySerialNumber; %>
 <%! double withdrawalAmount; %>
@@ -19,7 +20,8 @@
 	<% entryCategory = request.getParameter("entry_category");%>
     <%ViewPayablesDrilldown viewPayablesDrilldown = new ViewPayablesDrilldown(entryCategory);
       ListIterator<AccountStatement> requestIterator = viewPayablesDrilldown.getPayables().listIterator();
-	  DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");
+	  String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	  DecimalFormat ft = new DecimalFormat(currencyFormat);
       RupeeFormatter rf = new RupeeFormatter();
 	  AccountStatement temp;
 	  entrySerialNumber = 1;
@@ -37,7 +39,7 @@
 			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
 			<tr>

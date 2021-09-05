@@ -5,6 +5,7 @@
 <%@page import="java.text.*"%>
 <%@ page import="com.google.gson.*"%>
 <%@ page import="java.util.*" %>
+<%@page import="admin.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
 	
@@ -13,7 +14,9 @@
 	
 	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
     <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
-    <%DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");%>
+    <%String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	  String currencyPrefix = currencyFormat.substring(0, currencyFormat.indexOf(" ")).concat(" ")																;
+	  DecimalFormat ft = new DecimalFormat(currencyFormat);%>
     <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
     <%RupeeFormatter rf = new RupeeFormatter();%>
     <%double nonDiscretionaryExpenses = (ExpenseInstanceOne.getNonDiscretionaryExpenses() + ExpenseInstanceTwo.getNonDiscretionaryExpenses())*ExpenseInstanceTwo.getMonthsBetween();%>
@@ -52,12 +55,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		labelMaxWidth: 75
 	},
 	axisY: {
-		prefix: "Rs ",
+		prefix: "<%out.print(currencyPrefix);%>",
 		includeZero: true
 	},	
 	data: [{
 		type: "waterfall",
-		yValueFormatString: "Rs ##,##,##0.00",
+		yValueFormatString: "<%out.print(currencyFormat);%>" ,
 		indexLabel: "{y}",
 		risingColor: "#50cdc8",
 		fallingColor: "#ff6969",
@@ -156,7 +159,7 @@ chart.render();
 			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
 			<tr>

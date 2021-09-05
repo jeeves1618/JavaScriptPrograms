@@ -1,9 +1,10 @@
 <%@page import="ViewServices.*"%>
 <%@page import="CommonModules.*"%>
-<% int chartNumber = Integer.parseInt(request.getParameter("chartNumber"));%>
-
+<%@page import="admin.*"%>
+<%@page import="org.apache.commons.configuration2.ex.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,28 @@
 <link rel="stylesheet" href="FinancialManagementStyle.css">
 </head>
 <body>
-    <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
-     ChartOfAccounts chartOfAccountsList = viewChartOfAccounts.getChartElement(chartNumber);%>
-    
+   
 	<main class="maincontent">
     <div>
-        <h2 align=center>Chart of Accounts</h2>
+        <h2 align=center>Admin</h2>
+<%	CurrencyCustomization currencyCustomization = new CurrencyCustomization();
+	String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	String messageText;
+	messageText = currencyCustomization.getMessage();
+	String currencyFormatNew = request.getParameter("currencyFormatNew");
+	String operation = request.getParameter("operation");
+	String Plog1 = "Log1";
+	if (operation.equals("Update")){
+		Plog1 = "Log2";
+		try {
+			currencyCustomization.customizeCurrency("testToken",currencyFormatNew);
+		}catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
+		messageText = currencyCustomization.getMessage();
+  }
+  %>
+		
 		<table border=1; align=center>
         <col width="260"> 
         <col width="260"> 
@@ -38,40 +55,35 @@
 				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
 			</tr>
 		</table>
+		&nbsp;
+		<table class="class2"border=1; align=center>
+		<col width="1310">
+			<tr><td align="center" ><b><%=messageText%></b></td></tr>	
+		</table>
+		&nbsp;
         <table class="class2"border=1; align=center>
-            <col width="80"> 
-            <col width="450"> 
-            <col width="170"> 
-            <col width="200"> 
-			<col width="150"> 
-			<col width="50">
-			<col width="60">
-            <tr><td align="center"><b>Number</b></td>
-                <td align="center"><b>Account Description</b></td>
-				<td align="center"><b>Account Type</b></td>
-				<td align="center"><b>Statement</b></td>
-				<td align="center"><b>Amount</b></td>
-				<td align="center"><b>Liquid?</b></td>
-				<td align="center"><b>Actions</b></td>
+            <col width="572"> 
+			<col width="572">
+            <col width="160">
+            <tr><td align="center"><b>Current Format</b></td>
+				<td align="center"><b>New Format</b></td>
+                <td align="center"><b>Action</b></td>
 			</tr>
             
-				<form action="http://localhost:8090/FinancialStatements/persistChartofAccounts.jsp?chartNumber=<%= chartOfAccountsList.identificationNumber%>" method="POST">
-				<tr><td align="center" ><%= chartOfAccountsList.identificationNumber%></td>
-					<td align="left" style="padding-left:10px"><input type="text" name="itemDescription" value="<%= chartOfAccountsList.itemDescription%>"></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList.typeAssetOrLiability%></td>
-					<td align="left" style="padding-left:10px"><%= chartOfAccountsList.financialStatement%></td>
-					<td align="right" style="padding-left:10px"><input type="number" name="cashValue" value="<%= chartOfAccountsList.cashValue%>"></td>
-					<td align="left" style="padding-left:10px"><select name="isAssetLiquidInd" id="isAssetLiquidInd">
-						<option value="Y">Yes</option>
-						<option value="N">No</option>
-						</select>
-					<td align="center" style="padding-left:0px"><b><input type="submit" value="Save	"></b></td> 
-				</tr>
-				</form>
-            
-            </table>
-			&nbsp;
-			<div align="center"><form action="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" method="POST"><input type="submit" value="Cancel"></form></div>
+			<tr><td align="center" ><%= currencyFormat%></td>				
+				<td align="center" >
+				<form action="http://localhost:8090/FinancialStatements/admin.jsp?operation=Update" method="POST">					
+					  <select name="currencyFormatNew" id="currencyFormatNew">
+						<option value="Rs ##,##,##0.00">"Rs ##,##,##0.00"</option>
+						<option value="Rs ###,##0.00">"Rs ###,##0.00"</option>
+						<option value="$ ###,##0.00">"$ ###,##0.00"</option>
+						<option value="USD ###,##0.00">"USD ###,##0.00"</option>
+						<option value="SGD ###,##0.00">"SGD ###,##0.00"</option>
+						<option value="CAD ###,##0.00">"CAD ###,##0.00"</option>
+					  </select>		</td>
+				<td align="center" style="padding-left:0px"><b><input type="submit" value="Convert Currency"></form></b></td> 
+			</tr>
+          </table>
     </div>
 	</main>
 </body>

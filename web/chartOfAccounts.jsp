@@ -2,6 +2,7 @@
 <%@page import="CommonModules.*"%>
 <%@page import="IncomeStatement.*"%>
 <%@page import="java.text.*"%>
+<%@page import="admin.*"%>
 <%! int chartOfAccountsIterator; %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
@@ -16,7 +17,8 @@
 
     <%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts(); 
      ChartOfAccounts[] chartOfAccountsList = viewChartOfAccounts.getChartOfAccounts();
-	 DecimalFormat ft = new DecimalFormat("Rs ##,##,##0.00");
+	 String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	 DecimalFormat ft = new DecimalFormat(currencyFormat);
      RupeeFormatter rf = new RupeeFormatter();
 	 ExpenseCalculator e1 = new ExpenseCalculator("Two", "Sal1");
      ExpenseCalculator e2 = new ExpenseCalculator("One", "Sal1");%>
@@ -33,7 +35,7 @@
 			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
 				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/ExpenseSplit.jsp" class="button button2">Expense Split</a></td>
+				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
 				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
 			</tr>
 			<tr>
