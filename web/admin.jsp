@@ -19,7 +19,8 @@
         <h2 align=center>Admin</h2>
 <%	CurrencyCustomization currencyCustomization = new CurrencyCustomization();
 	String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
-	String messageText;
+	String messageText, refreshMessageText;
+	refreshMessageText = "Please click on the 'Refresh NLP Token List' button to refresh the last used date and time of tokens in the NLP Processor tab.";
 	messageText = currencyCustomization.getMessage();
 	String currencyFormatNew = request.getParameter("currencyFormatNew");
 	String operation = request.getParameter("operation");
@@ -33,6 +34,13 @@
         }
 		messageText = currencyCustomization.getMessage();
   }
+  if (operation.equals("Refresh")){
+			NLPTokenManager ExpenseInstanceTwo = new NLPTokenManager();
+			refreshMessageText = ExpenseInstanceTwo.NLPTokenRefresh("One", "Sal1");
+			refreshMessageText = ExpenseInstanceTwo.NLPTokenRefresh("Two", "Sal1");
+			refreshMessageText = ExpenseInstanceTwo.NLPTokenRefresh("One", "Sav1");
+			refreshMessageText = ExpenseInstanceTwo.NLPTokenRefresh("Two", "Sav1");
+	}
   %>
 		
 		<table border=1; align=center>
@@ -58,20 +66,20 @@
 		&nbsp;
 		<table class="class2"border=1; align=center>
 		<col width="1310">
-			<tr><td align="center" ><b><%=messageText%></b></td></tr>	
+			<tr><td align="center" bgcolor="lightblue"><b><%=messageText%></b></td></tr>	
 		</table>
 		&nbsp;
         <table class="class2"border=1; align=center>
             <col width="572"> 
 			<col width="572">
             <col width="160">
-            <tr><td align="center"><b>Current Format</b></td>
-				<td align="center"><b>New Format</b></td>
-                <td align="center"><b>Action</b></td>
+            <tr><td align="center" bgcolor="lightgrey"><b>Current Format</b></td>
+				<td align="center" bgcolor="lightgrey"><b>New Format</b></td>
+                <td align="center" bgcolor="lightgrey"><b>Action</b></td>
 			</tr>
             
-			<tr><td align="center" ><%= currencyFormat%></td>				
-				<td align="center" >
+			<tr><td align="center"  bgcolor="lightgrey"><%= currencyFormat%></td>				
+				<td align="center"  bgcolor="lightgrey">
 				<form action="http://localhost:8090/FinancialStatements/admin.jsp?operation=Update" method="POST">					
 					  <select name="currencyFormatNew" id="currencyFormatNew">
 						<option value="Rs ##,##,##0.00">"Rs ##,##,##0.00"</option>
@@ -81,9 +89,17 @@
 						<option value="SGD ###,##0.00">"SGD ###,##0.00"</option>
 						<option value="CAD ###,##0.00">"CAD ###,##0.00"</option>
 					  </select>		</td>
-				<td align="center" style="padding-left:0px"><b><input type="submit" value="Convert Currency"></form></b></td> 
+				<td align="center"  bgcolor="lightgrey" style="padding-left:0px"><b><input type="submit" value="Convert Currency"></form></b></td> 
 			</tr>
           </table>
+		  &nbsp;
+		  <table class="class2"border=1; align=center>
+			<col width="1000">
+			<col width="305">
+			<tr><td align="left"  bgcolor="lightgrey"><b><%=refreshMessageText%></b></td>
+				<form action="http://localhost:8090/FinancialStatements/admin.jsp?operation=Refresh" method="POST">	
+				<td align="center"  bgcolor="lightgrey" style="padding-left:0px"><b><input type="submit" value="Refresh NLP Token List"></form></b></td></tr>	 
+		   </table>
     </div>
 	</main>
 </body>
