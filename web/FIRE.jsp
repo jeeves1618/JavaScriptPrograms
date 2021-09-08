@@ -48,31 +48,31 @@
 				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
 			</tr>
 		</table>
-	<% inflationRate = Double.parseDouble(request.getParameter("inflation_rate"));
-	   rateOfReturn = Double.parseDouble(request.getParameter("return_rate"));
-	   moreYears = Integer.parseInt(request.getParameter("more_years"));%>
-	<%ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1");%>
-    <%ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1");%>
-    <%String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
-	  DecimalFormat ft = new DecimalFormat(currencyFormat);%>
-	<%DecimalFormat mt = new DecimalFormat("##,##,##0.00");%>
-    <%DecimalFormat pc = new DecimalFormat("##,##,##0.00 %");%>
-    <%RupeeFormatter rf = new RupeeFormatter();%>
+	<%inflationRate = Double.parseDouble(request.getParameter("inflation_rate"));
+	  rateOfReturn = Double.parseDouble(request.getParameter("return_rate"));
+	  moreYears = Integer.parseInt(request.getParameter("more_years")); 
+	  ExpenseCalculator ExpenseInstanceOne = new ExpenseCalculator("Two", "Sal1"); 
+      ExpenseCalculator ExpenseInstanceTwo = new ExpenseCalculator("One", "Sal1"); 
+      String currencyFormat = new CurrencyCustomization().getCurrencyFormat();
+	  DecimalFormat ft = new DecimalFormat(currencyFormat);  
+	 DecimalFormat mt = new DecimalFormat("##,##,##0.00"); 
+     DecimalFormat pc = new DecimalFormat("##,##,##0.00 %"); 
+     RupeeFormatter rf = new RupeeFormatter(); 
 	
-	<%ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
+	 ViewChartOfAccounts viewChartOfAccounts = new ViewChartOfAccounts();
 		String herName = viewChartOfAccounts.getHerName();
-		String hisName = viewChartOfAccounts.getHisName();%>
-    <%IncomeCalculator takeHomeInstanceOne = new IncomeCalculator(herName + "'s salary");%>
+		String hisName = viewChartOfAccounts.getHisName(); 
+     IncomeCalculator takeHomeInstanceOne = new IncomeCalculator(herName + "'s salary");              
 
-    <%IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator(hisName + "'s salary");%>
+     IncomeCalculator takeHomeInstanceTwo = new IncomeCalculator(hisName + "'s salary");   
 
 
-    <%buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.calculateOldTakeHome(), takeHomeInstanceOne.calculateOldTakeHome());%>
-	<%long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();
-	  double nonDiscretionaryInflationaryExpenses = (ExpenseInstanceOne.getTotalNonDiscretionExpenses() + ExpenseInstanceTwo.getTotalNonDiscretionExpenses())/12;
+     buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.calculateOldTakeHome(), takeHomeInstanceOne.calculateOldTakeHome()); 
+	 long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();
+	  double nonDiscretionaryInflationaryExpenses = (ExpenseInstanceOne.getNonDiscretionaryExpenses() - (ExpenseInstanceOne.getMonthlyEMI() * monthsInBetween) + ExpenseInstanceTwo.getNonDiscretionaryExpenses() - (ExpenseInstanceTwo.getMonthlyEMI() * monthsInBetween))/12;
 	  double nonDiscretionaryNonInflationaryExpenses = ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI();
-	  double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses;%>
-	<%double totalLiquidAssets = totalInc.getTotalLiquidAssets();
+	  double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses; 
+	 double totalLiquidAssets = totalInc.getTotalLiquidAssets();
 	  double totalLiquidAssetsROR1 = totalLiquidAssets;
 	  double totalLiquidAssetsROR2 = totalLiquidAssets;
 	  double totalLiquidAssetsROR3 = totalLiquidAssets;	  
