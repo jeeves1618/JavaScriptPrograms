@@ -68,11 +68,11 @@
 
 
      buildBalanceSheet totalInc = new buildBalanceSheet(takeHomeInstanceTwo.calculateOldTakeHome(), takeHomeInstanceOne.calculateOldTakeHome()); 
-	 long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();
-	  double nonDiscretionaryInflationaryExpenses = (ExpenseInstanceOne.getNonDiscretionaryExpenses() - (ExpenseInstanceOne.getMonthlyEMI() * monthsInBetween) + ExpenseInstanceTwo.getNonDiscretionaryExpenses() - (ExpenseInstanceTwo.getMonthlyEMI() * monthsInBetween))/12;
+	 long monthsInBetween = ExpenseInstanceOne.getMonthsBetween();	  
+	  double nonDiscretionaryInflationaryExpenses = ExpenseInstanceOne.getNonDiscretionaryExpenses() - ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getNonDiscretionaryExpenses() - ExpenseInstanceTwo.getMonthlyEMI();
 	  double nonDiscretionaryNonInflationaryExpenses = ExpenseInstanceOne.getMonthlyEMI() + ExpenseInstanceTwo.getMonthlyEMI();
-	  double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses; 
-	 double totalLiquidAssets = totalInc.getTotalLiquidAssets();
+	  double nonDiscretionaryExpenses =nonDiscretionaryInflationaryExpenses + nonDiscretionaryNonInflationaryExpenses;
+	  double totalLiquidAssets = totalInc.getTotalLiquidAssets();
 	  double totalLiquidAssetsROR1 = totalLiquidAssets;
 	  double totalLiquidAssetsROR2 = totalLiquidAssets;
 	  double totalLiquidAssetsROR3 = totalLiquidAssets;	  
@@ -127,7 +127,7 @@
 	  if (hundredXpast == true) hundredXtime = 0;
 	  %> 
         <table border=1; align=center>
-            <col width="944"> 
+            <col width="946"> 
             <col width="360"> 
 			          
             <tr><td align="center" colspan="2"><b><%= ExpenseInstanceOne.getTimePeriod()%></b></td></tr>
