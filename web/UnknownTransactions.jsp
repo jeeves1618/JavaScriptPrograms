@@ -15,6 +15,42 @@
 <meta charset="ISO-8859-1">
 <title>Unknown Transactions</title>
 <link rel="stylesheet" href="FinancialManagementStyle.css">
+<style>
+body {
+  margin: auto;
+  width: 95%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+topnav{
+  text-align: center;
+}
+topnav ul{
+  display: inline-block;
+}
+</style>
 </head>
 <body>
 	<% entryCategory = request.getParameter("entry_category");%>
@@ -33,26 +69,19 @@
     
     <div>
         <h2 align=center><%= entryCategory%> Transactions</h2>
-		<table border=1; align=center>
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-        <col width="260"> 
-		<col width="260"> 
-			<tr><td align="center"><a href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a></td>
-			</tr>
-			<tr>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a></td>
-				<td align="center"><a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a></td>
-				<td align="center" colspan="1"><a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a></td>
-				<td align="center" ><a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement</td>
-				<td align="center" colspan="1" color="red"><a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a></td>
-			</tr>
-		</table>
+		<div class="topnav">
+		<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
+		<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
+		<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
+		<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+		<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
+		<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+		<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
+		<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
+		<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+		<a class="active" href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+		</div>
+		&nbsp;
         <table border=1; align=center>
             <col width="50"> 
             <col width="150"> 
