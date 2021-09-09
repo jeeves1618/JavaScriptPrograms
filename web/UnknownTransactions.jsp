@@ -18,7 +18,7 @@
 <style>
 body {
   margin: auto;
-  width: 95%;
+  width: 93.7%;
 }
 
 .topnav {
