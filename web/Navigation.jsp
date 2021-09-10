@@ -42,16 +42,16 @@ topnav ul{
 </head>
 <body>
 <div class="topnav">
-<a class="active" href="http://localhost:8090/FinancialStatements/" class="button button2">Balance Sheet</a>
-<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a>
-<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a>
-<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a>
-<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a>
-<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a>
-<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a>
-<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a>
-<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement
-<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a>
+<a class="active" href="http://localhost:8080/FinancialStatements/" class="button button2">Balance Sheet</a>
+<a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp" class="button button2">Account Payables</a>
+<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp" class="button button2">Account Receivables</a>
+<a href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View" class="button button2">Personalization</a>
+<a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View" class="button button2">Tradeable Assets</a>
+<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30" class="button button2">F.I.R.E</a>
+<a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp" class="button button2">Chart of Accounts</a>
+<a href="http://localhost:8080/FinancialStatements/manageNLP.jsp" class="button button2">NLP Processor</a>
+<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp" class="button button2">Cash Flow Statement
+<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown" class="button button3">Unknown Transactions</a>
 
 </div>
 

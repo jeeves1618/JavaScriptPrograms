@@ -6,11 +6,13 @@
  pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
-<html>
+<html5>
 <head>
 <meta charset="ISO-8859-1">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chart of Accounts</title>
 <link rel="stylesheet" href="FinancialManagementStyle.css">
+
 <style>
 body {
   margin: auto;
@@ -80,16 +82,16 @@ topnav ul{
   %>
 		
 <div class="topnav">
-<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
-<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
-<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
-<a class="active" href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
-<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
-<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
-<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
-<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
-<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
-<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+<a href="http://localhost:8080/FinancialStatements/">Balance Sheet</a>
+<a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp">Payables</a>
+<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp">Receivables</a>
+<a class="active" href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+<a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeables</a>
+<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+<a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp">Chart Of Accounts</a>
+<a href="http://localhost:8080/FinancialStatements/manageNLP.jsp">NLP</a>
+<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Entries</a>
 </div>
 		&nbsp;
 		<table class="class2"border=0; align=center>
@@ -108,7 +110,7 @@ topnav ul{
             
 			<tr><td align="center"  bgcolor="white"><%= currencyFormat%></td>				
 				<td align="center"  bgcolor="white">
-				<form action="http://localhost:8090/FinancialStatements/admin.jsp?operation=Update" method="POST">					
+				<form action="http://localhost:8080/FinancialStatements/admin.jsp?operation=Update" method="POST">					
 					  <select name="currencyFormatNew" id="currencyFormatNew">
 						<option value="Rs ##,##,##0.00">"Rs ##,##,##0.00"</option>
 						<option value="Rs ###,##0.00">"Rs ###,##0.00"</option>
@@ -125,7 +127,7 @@ topnav ul{
 			<col width="1000">
 			<col width="305">
 			<tr><td align="left"  bgcolor="white"><b><%=refreshMessageText%></b></td>
-				<form action="http://localhost:8090/FinancialStatements/admin.jsp?operation=Refresh" method="POST">	
+				<form action="http://localhost:8080/FinancialStatements/admin.jsp?operation=Refresh" method="POST">	
 				<td align="center"  bgcolor="white" style="padding-left:0px"><b><input type="submit" value="Refresh NLP Token List"></form></b></td></tr>	 
 		   </table>
     </div>

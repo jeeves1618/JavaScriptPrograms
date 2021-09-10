@@ -55,16 +55,16 @@ topnav ul{
     <div>
         <h2 align=center>Chart of Accounts</h2>
 		<div class="topnav">
-		<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
-		<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
-		<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
-		<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
-		<a class="active" href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
-		<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
-		<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
-		<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+		<a href="http://localhost:8080/FinancialStatements/">Balance Sheet</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp">Payables</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp">Receivables</a>
+		<a href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+		<a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeables</a>
+		<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+		<a class="active" href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
+		<a href="http://localhost:8080/FinancialStatements/manageNLP.jsp">NLP</a>
+		<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+		<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Entries</a>
 		</div>
 		&nbsp;
         <table class="class2"border=1; align=center>
@@ -84,7 +84,7 @@ topnav ul{
 				<td align="center"><b>Actions</b></td>
 			</tr>
             
-				<form action="http://localhost:8090/FinancialStatements/persistChartofAccounts.jsp?chartNumber=<%= chartOfAccountsList.identificationNumber%>" method="POST">
+				<form action="http://localhost:8080/FinancialStatements/persistChartofAccounts.jsp?chartNumber=<%= chartOfAccountsList.identificationNumber%>" method="POST">
 				<tr><td align="center" ><%= chartOfAccountsList.identificationNumber%></td>
 					<td align="left" style="padding-left:10px"><input type="text" name="itemDescription" value="<%= chartOfAccountsList.itemDescription%>"></td>
 					<td align="left" style="padding-left:10px"><%= chartOfAccountsList.typeAssetOrLiability%></td>
@@ -100,7 +100,7 @@ topnav ul{
             
             </table>
 			&nbsp;
-			<div align="center"><form action="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp" method="POST"><input type="submit" value="Cancel"></form></div>
+			<div align="center"><form action="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp" method="POST"><input type="submit" value="Cancel"></form></div>
     </div>
 	</main>
 </body>

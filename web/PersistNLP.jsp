@@ -70,16 +70,16 @@ topnav ul{
     <div>
         <h2 align=center>Natural Language Processor Tokens</h2>
 		<div class="topnav">
-		<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
-		<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
-		<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
-		<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
-		<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
-		<a class="active" href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
-		<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
-		<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+		<a href="http://localhost:8080/FinancialStatements/">Balance Sheet</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp">Payables</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp">Receivables</a>
+		<a href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+		<a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeables</a>
+		<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+		<a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
+		<a class="active" href="http://localhost:8080/FinancialStatements/manageNLP.jsp">NLP</a>
+		<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+		<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Entries</a>
 		</div>
 		&nbsp;
         <table class="class2"border=1; align=center>
@@ -106,8 +106,8 @@ topnav ul{
 					<td align="left" style="padding-left:10px"><%= NLPlist.get(nlpEntriesIterator).entryCategory%></td>
 					<td align="left" style="padding-left:10px"><%= NLPlist.get(nlpEntriesIterator).discretionarySpendingIndicator%></td>
 					<td align="left" style="padding-left:10px"><%= NLPlist.get(nlpEntriesIterator).lastUsedDate%></td>
-					<td align="left" style="padding-left:0px"><b><form action="http://localhost:8090/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= NLPlist.get(nlpEntriesIterator).identificationNumber%>&operation=Update" method="POST">
-																	<input type="submit" value="Update"></form>&nbsp;<form action="http://localhost:8090/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= NLPlist.get(nlpEntriesIterator).identificationNumber%>&operation=Delete" method="POST"><input type="submit" value="Delete"></form></b></td>
+					<td align="left" style="padding-left:0px"><b><form action="http://localhost:8080/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= NLPlist.get(nlpEntriesIterator).identificationNumber%>&operation=Update" method="POST">
+																	<input type="submit" value="Update"></form>&nbsp;<form action="http://localhost:8080/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= NLPlist.get(nlpEntriesIterator).identificationNumber%>&operation=Delete" method="POST"><input type="submit" value="Delete"></form></b></td>
 				</tr>
 				<%identificationNumForAdd = NLPlist.get(nlpEntriesIterator).identificationNumber;%>
             <%}%>
@@ -115,7 +115,7 @@ topnav ul{
 			&nbsp;
 			<table border=1; align=center>
 			<col width="1312"> 
-			<tr><td align="center"><form action="http://localhost:8090/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= identificationNumForAdd%>&operation=Add" method="POST"><input type="submit" value="Add"></form></td>
+			<tr><td align="center"><form action="http://localhost:8080/FinancialStatements/EditNLPToken.jsp?tokenNumber=<%= identificationNumForAdd%>&operation=Add" method="POST"><input type="submit" value="Add"></form></td>
 			</tr></table
     </div>
 	</main>

@@ -178,16 +178,16 @@ topnav ul{
         <h2 align=center> Accounts Payables Monthly </h2>
 		</table>
         <div class="topnav">
-		<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
-		<a class="active" href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
-		<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
-		<a href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
-		<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
-		<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
-		<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
-		<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
-		<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+		<a href="http://localhost:8080/FinancialStatements/">Balance Sheet</a>
+		<a class="active" href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp">Payables</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp">Receivables</a>
+		<a href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+		<a href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeables</a>
+		<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+		<a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
+		<a href="http://localhost:8080/FinancialStatements/manageNLP.jsp">NLP</a>
+		<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+		<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Entries</a>
 		</div>
 		&nbsp;
 		<div id="blankLine" style="height: 25px; width: 100%;"></div>
@@ -200,7 +200,7 @@ topnav ul{
             <col width="471"> 
             <col width="180">  
             <tr><td align="right" colspan="4"><b><%= ExpenseInstanceOne.getTimePeriod()%></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			<a href="http://localhost:8090/FinancialStatements/AccountsPayableAnnual.jsp" class="button button1">Yearly View</button></td></tr>
+			<a href="http://localhost:8080/FinancialStatements/AccountsPayableAnnual.jsp" class="button button1">Yearly View</button></td></tr>
             <tr><td align="center" colspan="2"><b><%= herName%> - Monthly Summary</b></td>
                 <td align="center" colspan="2"><b><%= hisName%> - Monthly Summary</b></td></tr>
                         

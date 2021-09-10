@@ -170,16 +170,16 @@ function toggleDataSeries(e) {
    
 	<h2 align=center>Regularly Traded Assets History</h2>
 	<div class="topnav">
-		<a href="http://localhost:8090/FinancialStatements/">Balance Sheet</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsPayable.jsp">Account Payables</a>
-		<a href="http://localhost:8090/FinancialStatements/AccountsReceivable.jsp">Account Receivables</a>
-		<a href="http://localhost:8090/FinancialStatements/admin.jsp?operation=View">Personalization</a>
-		<a class="active" href="http://localhost:8090/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeable Assets</a>
-		<a href="http://localhost:8090/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
-		<a href="http://localhost:8090/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
-		<a href="http://localhost:8090/FinancialStatements/manageNLP.jsp">NLP Processor</a>
-		<a href="http://localhost:8090/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
-		<a href="http://localhost:8090/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Transactions</a>
+		<a href="http://localhost:8080/FinancialStatements/">Balance Sheet</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsPayable.jsp">Payables</a>
+		<a href="http://localhost:8080/FinancialStatements/AccountsReceivable.jsp">Receivables</a>
+		<a href="http://localhost:8080/FinancialStatements/admin.jsp?operation=View">Personalization</a>
+		<a class="active" href="http://localhost:8080/FinancialStatements/NetworthHistory.jsp?operation=View">Tradeables</a>
+		<a href="http://localhost:8080/FinancialStatements/FIRE.jsp?inflation_rate=6&return_rate=8&more_years=30">F.I.R.E</a>
+		<a href="http://localhost:8080/FinancialStatements/chartOfAccounts.jsp">Chart of Accounts</a>
+		<a href="http://localhost:8080/FinancialStatements/manageNLP.jsp">NLP</a>
+		<a href="http://localhost:8080/FinancialStatements/CashFlowStatement.jsp">Cash Flow</a>
+		<a href="http://localhost:8080/FinancialStatements/UnknownTransactions.jsp?entry_category=Unknown">Unknown Entries</a>
 		</div>
 		&nbsp;
 	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
@@ -208,16 +208,16 @@ function toggleDataSeries(e) {
 					<td align="right" style="padding-left:10px; color: #0086b3;"><%= NetworthHistoryList[networthHistoryIterator].twoAmountFmtd%></td>
 					<td align="right" style="padding-left:10px; color: #cc0000;"><%= NetworthHistoryList[networthHistoryIterator].oneAmountFmtd%></td>
 					<td align="right" style="padding-left:10px; color: #66cc00;"><%= NetworthHistoryList[networthHistoryIterator].totalAmountFmtd%></td>
-					<td align="center" style="padding-left:0px"><b><form action="http://localhost:8090/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= NetworthHistoryList[networthHistoryIterator].serialNumber%>
+					<td align="center" style="padding-left:0px"><b><form action="http://localhost:8080/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= NetworthHistoryList[networthHistoryIterator].serialNumber%>
 								&dateTime=<%= NetworthHistoryList[networthHistoryIterator].valueDate%>&twoAmount=<%= NetworthHistoryList[networthHistoryIterator].twoAmount%>
-								&oneAmount=<%= NetworthHistoryList[networthHistoryIterator].oneAmount%>&operation=Update" method="POST"><input type="submit" value="Update Entry"></form>&nbsp;<form action="http://localhost:8090/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= NetworthHistoryList[networthHistoryIterator].serialNumber%>&operation=Delete"method="POST"><input type="submit" value="Delete Entry"></form></td></b></td>
+								&oneAmount=<%= NetworthHistoryList[networthHistoryIterator].oneAmount%>&operation=Update" method="POST"><input type="submit" value="Update Entry"></form>&nbsp;<form action="http://localhost:8080/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= NetworthHistoryList[networthHistoryIterator].serialNumber%>&operation=Delete"method="POST"><input type="submit" value="Delete Entry"></form></td></b></td>
 				</tr>
 				
             <%}%>
             </table>
 			<table border=1; align=center>
 			<col width="1225"> 
-			<tr><td align="center"><form action="http://localhost:8090/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= networthHistoryIterator%>&operation=Add Entry" method="POST"><input type="submit" value="Add Entry"></form>
+			<tr><td align="center"><form action="http://localhost:8080/FinancialStatements/AddUpdateDeleteNW.jsp?sNo=<%= networthHistoryIterator%>&operation=Add Entry" method="POST"><input type="submit" value="Add Entry"></form>
 			</tr></table>
     </div>	
 	
