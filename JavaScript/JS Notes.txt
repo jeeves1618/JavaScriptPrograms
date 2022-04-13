@@ -1,0 +1,38 @@
+To install liver server through NPM
+	npm install live-server -g - For Windows
+	sudo npm install live-server -g - For Mac
+
+To start the Live Server
+	live-server
+	
+DOM - Document Object Model is the structured representation of HTML documents. Allows JS and CSS to accesses HTML elements and styles to manipulate them.
+DOM is not part of JavaScript. It is part of WEB APIs.
+
+Basics of HTML
+	- classes and Ids
+	- Classes doesn't have to be unique. Ids have to be unique
+	- When you put form elements in a section, it makes sense to change div to form
+	
+Basics of CSS
+	- sytle sheet is linked through link and rel=stylesheet within HTML
+	- Standard HTML elements are accessed by their names within the style sheet. Example:  body {font-family : Arial }
+	- Classes are accessed through dot operator. Example: .first {font-family : Comic }
+	- Ids are accessed through # operator. Example: #first {font-family : Comic }
+	- if you want to apply a style to all sections, use the * operator. * {font-family : Arial}
+	
+Back to JS
+	- Selecting an element in JavaScript - document.querySelector('.first') 
+	- JavaScript accesses HTML elements in the same way as CSS. 
+	- document.querySelector('.first') will give the value of the element identified by the class 'first'. To change the value, just assign the new value document.querySelector('.first') = 'New Value'
+	- To get the value use the textContent property. document.querySelector('.first').textContent will give the value 
+	- To get the value from a input field, use document.querySelector('.first').value
+	
+So far, we are not capturing any events from the web page.
+
+Handling Click Events
+	- In order to get the data from the text box on the click of the button (class = "btn two") by adding a listener for the action and function to do what needs to be done on that action. 
+	- Here we have a text box with the class boxer and a button with the class "btn two". We can access the data entered in the text box and display it in console log on the click of the button as below
+	document.querySelector('.two').addEventListener 
+	('click', function(){
+		console.log(document.querySelector('.boxer').value);
+		}
