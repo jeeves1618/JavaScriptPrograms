@@ -36,3 +36,19 @@ Handling Click Events
 	('click', function(){
 		console.log(document.querySelector('.boxer').value);
 		}
+
+The problem with querySelector:
+	if you have three buttons like these,	
+	<button class="show-modal">Show modal 1</button>
+    <button class="show-modal">Show modal 2</button>
+    <button class="show-modal">Show modal 3</button>
+
+	and you want to select them all, document.querySelector will not work. Because, it will select only the first button. So, you have to use document.querySelectorAll
+	
+	Remember that document.querySelectorAll('.someclass') is an array
+	
+Diagrams.net has the free flowcharting ability
+
+JS Engine:
+	JS Engine is the program that runs Javascript. Most popular one is V8. It also runs the NodeJS.
+	
