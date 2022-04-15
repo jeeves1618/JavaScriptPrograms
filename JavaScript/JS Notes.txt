@@ -50,5 +50,19 @@ The problem with querySelector:
 Diagrams.net has the free flowcharting ability
 
 JS Engine:
-	JS Engine is the program that runs Javascript. Most popular one is V8. It also runs the NodeJS.
+	JS Engine is the program that runs Javascript. Most popular one is V8. It also runs the NodeJS. Two major constituents of JS Engine Call Stack and Memory Heap.
+	There are three ways of converting a high level programming language into a machine code.
+		1. Compilation: Entire code is converted into a machine code at once and written to a binary file that can be executed by a computer.
+		2. Inpretation: Interpretor runs through the code and executes it line by line
+		3. Just-In-Time (JIT) compilation: Entire code is converted into a machine code at once and then executed immediatly. JS is JIT compilation. The difference between Compilation and JIT are
+			a. Compilation and execution happens at different times during compilation. In JIT it happens immediatly.
+			b. The code is compiled once and executed many times during compilation. In JIT, code is compiled everytime before execution.
+			c. The compiled code is portable after compilation. In JIT the compiled code is not portable.
+	JS has only one main thread. So, it implements non blocking event loops to run back ground processes. 
+	Inside the JS Engine, an execution context is created. A global execution context is created for the top level code. Then an new execution context is created for functions and methods (functions are 
+	methods in objects)
+	All these execution contexts will make up the call stack. 
+
+Deeper look into Execution Context
+	Whats inside EC? Variable environment, Scope Chain and This keyword. 
 	
